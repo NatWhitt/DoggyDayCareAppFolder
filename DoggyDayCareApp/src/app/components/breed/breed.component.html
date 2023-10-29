@@ -1,0 +1,40 @@
+<h1>Test</h1>
+<div class="col-4">
+    <div >
+    <form class="add-form" [hidden]="!create" (ngSubmit)="createBreed()">
+        <div  class="form-control">
+            <label for="text">Breed</label>
+            <input type="text" name="text" [(ngModel)]="newBreedName" id="text" placeholder="Breed Name">
+        </div>
+        <input type="submit" value="Create Breed" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" (click) = "createButton()">Cancel Create</button>
+    </form>
+</div>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope ="col">Breed</th>
+            <th scope="col2">Options 
+                <button *ngIf="!create" type="button" class="btn btn-primary" (click) = "createButton()">Create</button> 
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let breed of breeds">
+            <td>{{breed.id}}</td>
+            <td *ngIf="!edit" >{{breed.name}}</td>
+            <td *ngIf="edit">
+                <input type="text" name="name"id="text" [(ngModel)]="breed.name" value="{{breed.name}}" placeholder="name"></td>
+            <td>
+                <button *ngIf="!edit && !delete" type="button" class="btn btn-secondary " (click) = "editButton()">Edit</button>
+                <button *ngIf="edit" type="button" class="btn btn-secondary" (click) = "editBreed(breed)">Confirm Edit</button>
+                <button *ngIf="!delete && !edit"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
+                <button *ngIf="delete"  type="button" class="btn btn-danger" (click) = "deleteBreed(breed)">Confirm Delete</button>
+                <button *ngIf="edit|| delete"type="button" class="btn btn-primary" (click) = "cancel()">Cancel</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
