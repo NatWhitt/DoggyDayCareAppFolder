@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Breed } from 'app/models/breed';
-import { BreedService } from 'app/services/BreedService';
+import { BreedService } from 'app/services/breed.service';
 
 @Component({
   selector: 'app-breed',
@@ -37,8 +37,8 @@ export class BreedComponent {
     this.edit = false;
   }
 
-  deleteBreed(removeBreed:Breed){
-    this.breedService.deleteBreed(removeBreed).subscribe(() => this.breeds = this.breeds.filter(b => b.id !== removeBreed.id));
+  deleteBreed(deleteBreed:Breed){
+    this.breedService.deleteBreed(deleteBreed).subscribe(() => this.breeds = this.breeds.filter(b => b.id !== deleteBreed.id));
     this.delete = false;
   }
 

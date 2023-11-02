@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Breed } from 'app/models/breed';
 import { map } from 'rxjs/operators'
-import { ServiceResponse } from 'app/models/service-response';
+import { environment } from 'environments/environment';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -17,13 +17,13 @@ const httpOptions = {
 export class BreedService {
   private url = 'Breed';
 
-  private apiUrl = 'https://localhost:7232/api'
+
 
 
   constructor(private http:HttpClient) { }
 
   getBreeds() : Observable<Breed[]>{
-  return  this.http.get<Breed[]>(`${this.apiUrl}/${this.url}`)
+  return  this.http.get<Breed[]>(`${environment.apiUrl}/${this.url}`)
   .pipe(map(responseData =>{
     const breeds = [];
       for(const key in responseData){
@@ -39,7 +39,7 @@ export class BreedService {
   }
 
 getBreed(id: number) : Observable<Breed>{
-  return  this.http.get<Breed>(`${this.apiUrl}/${this.url}/${id}`)
+  return  this.http.get<Breed>(`${environment.apiUrl}/${this.url}/${id}`)
   .pipe(map((responseData:any)=>{
     let data: any;
     for(const key in responseData){
@@ -54,7 +54,7 @@ getBreed(id: number) : Observable<Breed>{
   }));
 }
 updateBreed(breed : Breed) :Observable<Breed>{
-  return this.http.put<Breed>(`${this.apiUrl}/${this.url}`, breed)  
+  return this.http.put<Breed>(`${environment.apiUrl}/${this.url}`, breed)  
   .pipe(map((responseData:any)=>{
     let data: any;
     for(const key in responseData){
@@ -70,9 +70,9 @@ updateBreed(breed : Breed) :Observable<Breed>{
 }
 
 deleteBreed(breed: Breed) : Observable<Breed>{
-  return this.http.delete<Breed>(`${this.apiUrl}/${this.url}/${breed.id}`, httpOptions);
+  return this.http.delete<Breed>(`${environment.apiUrl}/${this.url}/${breed.id}`, httpOptions);
 }
 createBreed(breed: Breed): Observable<Breed>{
-  return this.http.post<Breed>(`${this.apiUrl}/${this.url}`, breed, httpOptions);
+  return this.http.post<Breed>(`${environment.apiUrl}/${this.url}`, breed, httpOptions);
 }
 }

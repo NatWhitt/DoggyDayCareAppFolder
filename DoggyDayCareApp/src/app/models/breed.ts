@@ -1,4 +1,4 @@
-export interface Breed{
+export class Breed{
     id?: number;
-    name: string;
+    name: string = "";
 }

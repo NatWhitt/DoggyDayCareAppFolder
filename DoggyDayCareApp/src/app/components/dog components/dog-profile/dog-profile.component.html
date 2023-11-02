@@ -1,0 +1,81 @@
+<div *ngIf="dog"class="container">
+    <main>
+        <div class="">
+          <h4 class="mb-3">Dog Record</h4>    
+          <a class="btn btn-primary" [title]="'Dog List'"
+          [routerLink]="['/dog-list']">
+          Dog List</a>
+          <!-- change to lock icon          -->
+          <button type="button" class="btn btn-warning" (click) = "enableEdit()">Enable Edit</button>
+          <form  class="needs-validation" (ngSubmit)="editDog(dog)"novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="forename" class="form-label">Forename</label>
+                <input type="text" class="form-control" name="forename" id="forename" [(ngModel)]="dog.forename" placeholder="Forename" value="{{dog.forename}}" required>
+                <div class="invalid-feedback">
+                  Valid forename is required.
+                </div>
+
+                <label for="surname" class="form-label">Surname</label>
+                <input type="text" class="form-control" name="surname" id="surname" [(ngModel)]="dog.surname" placeholder="Surname" value="{{dog.surname}}" required>
+                <div class="invalid-feedback">
+                  Valid surname is required.
+                </div>
+
+                <label for="breed" class="form-label">Breed</label>
+                <select class="form-select" name="breed" id="breed" [(ngModel)]="dog.breed" required>
+                  <option *ngFor="let breed of breeds" [value]="breed.id">{{breed.name}}
+                </select>
+                <div class="invalid-feedback">
+                  Please select a breed.
+                </div>
+
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" name="description" id="description" [(ngModel)]="dog.description" placeholder="description" value="{{dog.description}}" required>
+                <div class="invalid-feedback">
+                  Valid description is required.
+                </div>
+
+                <label for="dob" class="form-label">DOB</label>
+                <input type="date" class="form-control" name="dob" id="dob" [(ngModel)]="dog.dob" placeholder="DOB" value = "{{dog.dob | date:'dd/MM/yyyy'}}" required>
+                <div class="invalid-feedback">
+                  Valid dob is required.
+                </div>
+
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="date" class="form-control" name="startDate" id="startDate" [(ngModel)]="dog.startDate" placeholder="Start date" value = "{{dog.startDate | date:'dd/MM/yyyy'}}" required>
+                <div class="invalid-feedback">
+                  Valid startDate is required.
+                </div>
+
+                <label for="status" class="form-label">System Status</label>
+                <input type="number" class="form-control" name="status"  id="status" [(ngModel)]="dog.systemStatus" placeholder="System Status" value="{{dog.systemStatus}}" required>
+                <div class="invalid-feedback">
+                  Valid systemStatus is required.
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <p>add photo here</p>
+              </div>
+            </div>
+            <input *ngIf="edit" type="submit" value="Confirm Edit" class="btn btn-secondary" (click) = "editDog(dog)">
+            <!-- <button *ngIf="edit" type="button" class="btn btn-secondary" (click) = "editDog(dog)">Confirm Edit</button> -->
+            <button *ngIf="edit"type="button" class="btn btn-primary" (click) = "enableEdit()">Cancel</button>
+            </form>
+        </div>
+    </main>
+  </div>
+  <ng-container *ngIf="!dog">
+    <div class="card text-white bg-danger mb-3">
+      <div class="card-header">
+        Error {{this.errorStatus}}
+      </div>
+      <div class="card-body dan">
+        <h5 class="card-title">{{this.errorMessage}}</h5>
+        <p class="card-text">Please go back to the list and try again</p>
+        <a class="btn btn-primary"[title]="'Dog List'"
+          [routerLink]="['/dog-list']">
+          Dog List</a>
+      </div>
+    </div>
+      </ng-container>

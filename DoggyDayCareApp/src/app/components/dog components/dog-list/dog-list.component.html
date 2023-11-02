@@ -1,0 +1,41 @@
+<h1>Dog</h1>
+<div class="">
+    <a [title]="'Create Dog'"
+                [routerLink]="['/create-dog']">
+                Create Dog
+            </a>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope ="col">Forename</th>
+            <th scope ="col">Surname</th>
+            <th scope ="col">Breed</th>
+            <th scope ="col">Description</th>
+            <th scope ="col">DOB</th>
+            <th scope ="col">Start Date</th>
+            <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let dog of dogs">
+            <td>{{dog.id}}</td>
+            <td>{{dog.forename}}</td>
+            <td>{{dog.surname}}</td>
+            <td>{{dog.breed.name}}</td>
+            <td>{{dog.description}}</td>
+            <td>{{dog.dob | date:'dd/MM/yyyy'}}</td>
+            <td>{{dog.startDate | date:'dd/MM/yyyy'}}</td>
+            <td> <a [title]="'SelectDog'"
+                [routerLink]="['/dog-profile',dog.id]">
+                Select Dog
+            </a>
+                <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
+                <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteDog(dog)">Confirm Delete</button>
+                <button *ngIf="showDeleteOptions && delete"type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
