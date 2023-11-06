@@ -14,7 +14,10 @@ import { CreateDogComponent } from './components/dog components/create-dog/creat
 import { HeaderComponent } from './components/utility/header/header.component';
 import { FooterComponent } from './components/utility/footer/footer.component';
 import { MenuBarComponent } from './components/utility/menu-bar/menu-bar.component';
-import { ContactListComponent } from './components/contacts/contact-list/contact-list.component';
+import { DogContactListComponent } from './components/contacts/contact-list/dog-contact-list.component';
+import { DogCoreInformationComponent } from './components/dog components/dog-core-information/dog-core-information.component';
+import { CreateContactComponent } from './components/contacts/contact-list/create-contact/create-contact.component';
+import { LinkExistingContactComponent } from './components/contacts/contact-list/link-existing-contact/link-existing-contact.component';
 
 
 
@@ -28,7 +31,10 @@ import { ContactListComponent } from './components/contacts/contact-list/contact
     HeaderComponent,
     FooterComponent,
     MenuBarComponent,
-    ContactListComponent
+    DogContactListComponent,
+    DogCoreInformationComponent,
+    CreateContactComponent,
+    LinkExistingContactComponent
     
   ],
   imports: [

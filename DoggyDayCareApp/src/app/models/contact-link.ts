@@ -1,4 +1,4 @@
-export interface ContactLink {
-    contactId: number;
-    dogId: number;
+export class ContactLink {
+    contactId: number = 0;
+    dogId: number =0;
 }

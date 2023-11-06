@@ -1,0 +1,35 @@
+<div class="">
+    <button type="button" class="btn btn-warning" (click) = "createButton()">Add new Contact</button>
+    <app-create-contact *ngIf="(create)" [selectedDog] = "currentDog" (statusEvent)="handleCreateNewForm($event)"></app-create-contact>
+    <app-link-existing-contact *ngIf="(create)" [selectedDog] = "currentDog" (statusEvent)="handleCreateNewForm($event)"></app-link-existing-contact>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope ="col">Title</th>
+            <th scope ="col">Forename</th>
+            <th scope ="col">Surname</th>
+            <th scope ="col">phoneNumber</th>
+            <th scope ="col">email</th>
+            <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let contact of contacts">
+            <td>{{contact.id}}</td>
+            <td>{{contact.title}}</td>
+            <td>{{contact.forename}}</td>
+            <td>{{contact.surname}}</td>
+            <td>{{contact.phoneNumber}}</td>
+            <td>{{contact.email}}</td>
+            <td>
+
+                <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
+                <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteContact(contact)">Confirm Delete</button>
+                <button *ngIf="showDeleteOptions && delete"type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,16 @@
+<div class="container" *ngIf="selectedDog">
+    <main>
+        <p>test</p>
+          <form class="needs-validation" (ngSubmit)="onSubmit()" novalidate>
+                <label for="contact" class="form-label">Contact</label>
+                <select class="form-select" name="contact" id="contact" [(ngModel)]="selectedContact" required>
+                  <option *ngFor="let contact of contacts" [ngValue]="contact">{{contact.forename}} {{contact.surname}}
+                </select>
+                <div class="invalid-feedback">
+                  Please select a contact.
+                </div>
+            <input type="submit" value="Save record" class="btn btn-block">
+            <input type="reset" value="reset record" class="btn btn-block">
+            </form>
+    </main>
+  </div>

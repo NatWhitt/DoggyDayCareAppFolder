@@ -1,12 +1,12 @@
 import { Dog } from "./dog";
 
-export interface Contact {
+export class Contact {
     id? : number;
-    title: string;
-    forename: string;
-    surname: string;
-    email: string;
-    phoneNumber: string;
-    contactPrioprity : number;
-    dogs : Dog[];
+    title: string ='';
+    forename: string ='';
+    surname: string ='';
+    email: string ='';
+    phoneNumber: string ='';
+    contactPriority : number =0;
+    dog? : Dog;
 }

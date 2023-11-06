@@ -1,5 +1,5 @@
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Dog } from 'app/models/dog';
 import { DogService } from 'app/services/dog.service';
 import { BreedService } from 'app/services/breed.service';
@@ -12,11 +12,13 @@ import { Breed } from 'app/models/breed';
 })
 export class DogProfileComponent {
   dog : Dog | undefined;
-  breeds : Breed[] = [];
-  edit :boolean = false;
+
   dogIdFromRoute : number | undefined;
   errorMessage = '';
   errorStatus = '';
+  view = 'core';
+
+  @Output() currentDog: EventEmitter<Dog> = new EventEmitter();
 
 
   constructor(private dogService: DogService, private route: ActivatedRoute, private breedService: BreedService){}
@@ -35,16 +37,10 @@ export class DogProfileComponent {
         this.errorMessage = err.error 
       }
     });
-    this.breedService.getBreeds().subscribe((breeds) => this.breeds = breeds);
   }
-  enableEdit(){
-    this.edit = !this.edit;
-  }
-  editDog(selectedDog:Dog){
-    this.dog = selectedDog;  
-    this.dogService.updateDog(selectedDog).subscribe((dog) => selectedDog = dog)
-    this.edit = false;
+  setView(page:string){
+    this.view = page;
   }
 
-
+  
 }

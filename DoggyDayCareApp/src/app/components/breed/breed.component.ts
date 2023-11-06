@@ -49,7 +49,7 @@ export class BreedComponent {
   }
   createBreed(){
       if(!this.newBreedName){
-        alert('Please add a task');
+        alert('Please add a breed');
         return;
       }
       const newBreed ={
