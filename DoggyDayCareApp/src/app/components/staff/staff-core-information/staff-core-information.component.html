@@ -1,0 +1,51 @@
+<div *ngIf="staff"class="container">
+    <main>
+        <div class="">
+          <h4 class="mb-3">Staff Record</h4>    
+          <!-- change to lock icon          -->
+          <button type="button" class="btn btn-warning" (click) = "enableEdit()">Enable Edit</button>
+          <form  class="needs-validation" (ngSubmit)="editStaff(staff)"novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="title" [(ngModel)]="staff.title" placeholder="Title" value="{{staff.title}}" required>
+                <div class="invalid-feedback"> 
+                  Valid title is required.
+                </div>
+
+                <label for="forename" class="form-label">Forename</label>
+                <input type="text" class="form-control" name="forename" id="forename" [(ngModel)]="staff.forename" placeholder="Forename" value="{{staff.forename}}" required>
+                <div class="invalid-feedback"> 
+                  Valid forename is required.
+                </div>
+
+                <label for="surname" class="form-label">Surname</label>
+                <input type="text" class="form-control" name="surname" id="surname" [(ngModel)]="staff.surname" placeholder="Surname" value="{{staff.surname}}" required>
+                <div class="invalid-feedback">
+                  Valid surname is required.
+                </div>
+
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="date" class="form-control" name="startDate" id="startDate" [(ngModel)]="staff.startDate" (ngModelChange)="this.staff.startDate=$event" value="dog.startDate">
+                <div class="invalid-feedback">
+                  Valid start Date is required.
+                </div>
+
+                <label for="status" class="form-label">System Status</label>
+                <input type="number" class="form-control" name="status"  id="status" [(ngModel)]="staff.systemStatus" placeholder="System Status" value="{{staff.systemStatus}}" required>
+                <div class="invalid-feedback">
+                  Valid system Status is required.
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <p>add photo here</p>
+              </div>
+            </div>
+            <input *ngIf="edit" type="submit" value="Confirm Edit" class="btn btn-secondary" (click) = "editStaff(staff)">
+            <!-- <button *ngIf="edit" type="button" class="btn btn-secondary" (click) = "editDog(dog)">Confirm Edit</button> -->
+            <button *ngIf="edit"type="button" class="btn btn-primary" (click) = "enableEdit()">Cancel</button>
+            </form>
+        </div>
+    </main>
+  </div>

@@ -1,0 +1,49 @@
+<div class="container">
+    <main>
+        <div class="">
+            <a [title]="'go back'"
+                [routerLink]="['/staff-list']">
+                Staff List
+            </a>
+          <h4 class="mb-3">Staff Record</h4>
+          <form class="needs-validation" (ngSubmit)="onSubmit()" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="title" [(ngModel)]="title" placeholder="Title" required>
+                <div class="invalid-feedback">
+                  Valid forename is required.
+                </div>
+
+                <label for="forename" class="form-label">Forename</label>
+                <input type="text" class="form-control" name="forename" id="forename" [(ngModel)]="forename" placeholder="Forename" required>
+                <div class="invalid-feedback">
+                  Valid forename is required.
+                </div>
+
+                <label for="surname" class="form-label">Surname</label>
+                <input type="text" class="form-control" name="surname" id="surname" [(ngModel)]="surname" placeholder="Surname"  required>
+                <div class="invalid-feedback">
+                  Valid surname is required.
+                </div>
+
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="date" class="form-control"  name="startDate" [(ngModel)]="startDate" (ngModelChange)="this.startDate=$event">
+                <div class="invalid-feedback">
+                  Valid startDate is required.
+                </div>
+
+                <label for="status" class="form-label">System Status</label>
+                <input type="number" class="form-control" name="status"  id="status" [(ngModel)]="systemStatus" placeholder="System Status"  required>
+                <div class="invalid-feedback">
+                  Valid systemStatus is required.
+                </div>
+              </div>
+            </div>
+            <input type="submit" value="Save record" class="btn btn-block">
+            <input type="reset" value="reset record" class="btn btn-block">
+            </form>
+        </div>
+    </main>
+  </div>

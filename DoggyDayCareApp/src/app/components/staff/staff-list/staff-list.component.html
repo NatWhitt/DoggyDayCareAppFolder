@@ -1,0 +1,38 @@
+<h1>Staff</h1>
+<div class="">
+    <a [title]="'Create Staff'"
+                [routerLink]="['/create-staff']">
+                Create Staff
+            </a>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope ="col">Title</th>
+            <th scope ="col">Forename</th>
+            <th scope ="col">Surname</th>
+            <th scope ="col">Start Date</th>
+            <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let staff of staffs">
+            <td>{{staff.id}}</td>
+            <td>{{staff.title}}</td>
+            <td>{{staff.forename}}</td>
+            <td>{{staff.surname}}</td>
+            <td>{{staff.startDate | date:'dd/MM/yyyy'}}</td>
+            <td> <a [title]="'SelectStaff'"
+                [routerLink]="['/staff-profile',staff.id]">
+                Select Staff
+            </a>
+                <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
+                <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteStaff(staff)">Confirm Delete</button>
+                <button *ngIf="showDeleteOptions && delete"type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+`

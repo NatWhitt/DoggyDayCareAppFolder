@@ -19,6 +19,11 @@ import { DogCoreInformationComponent } from './components/dog components/dog-cor
 import { CreateContactComponent } from './components/contacts/contact-list/create-contact/create-contact.component';
 import { LinkExistingContactComponent } from './components/contacts/contact-list/link-existing-contact/link-existing-contact.component';
 
+import { StaffListComponent } from './components/staff/staff-list/staff-list.component';
+import { StaffProfileComponent } from './components/staff/staff-profile/staff-profile.component';
+import { StaffCoreInformationComponent } from './components/staff/staff-core-information/staff-core-information.component';
+import { CreateStaffComponent } from './components/staff/create-staff/create-staff.component';
+
 
 
 @NgModule({
@@ -34,7 +39,11 @@ import { LinkExistingContactComponent } from './components/contacts/contact-list
     DogContactListComponent,
     DogCoreInformationComponent,
     CreateContactComponent,
-    LinkExistingContactComponent
+    LinkExistingContactComponent,
+    StaffListComponent,
+    StaffProfileComponent,
+    StaffCoreInformationComponent,
+    CreateStaffComponent
     
   ],
   imports: [

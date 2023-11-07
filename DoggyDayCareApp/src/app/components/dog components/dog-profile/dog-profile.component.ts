@@ -25,9 +25,6 @@ export class DogProfileComponent {
   ngOnInit():void {
     const routeParams = this.route.snapshot.paramMap;
     this.dogIdFromRoute = Number(routeParams.get('id'));
-    // this.dogService.getDog(this.dogIdFromRoute).subscribe((dog) => this.dog = dog);
-    // this.dogService.getDog(this.dogIdFromRoute).subscribe((dog:Dog) => this.dog = dog);
-
    this.dogService.getDog(this.dogIdFromRoute).subscribe({
       next: dog => {
         this.dog = dog;
