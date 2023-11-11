@@ -23,6 +23,12 @@ import { StaffListComponent } from './components/staff/staff-list/staff-list.com
 import { StaffProfileComponent } from './components/staff/staff-profile/staff-profile.component';
 import { StaffCoreInformationComponent } from './components/staff/staff-core-information/staff-core-information.component';
 import { CreateStaffComponent } from './components/staff/create-staff/create-staff.component';
+import { SessionListComponent } from './components/session/session-list/session-list.component';
+import { CreateSessionComponent } from './components/session/create-session/create-session.component';
+import { CreateBulkSessionsComponent } from './components/session/create-bulk-sessions/create-bulk-sessions.component';
+import { SessionDetailsComponent } from './components/session/session-details/session-details.component';
+import { CreateBulkStaffLinkComponent } from './components/session/create-bulk-staff-link/create-bulk-staff-link.component';
+import { StaffSessionsComponent } from './components/staff/staff-sessions/staff-sessions.component';
 
 
 
@@ -43,7 +49,13 @@ import { CreateStaffComponent } from './components/staff/create-staff/create-sta
     StaffListComponent,
     StaffProfileComponent,
     StaffCoreInformationComponent,
-    CreateStaffComponent
+    CreateStaffComponent,
+    SessionListComponent,
+    CreateSessionComponent,
+    CreateBulkSessionsComponent,
+    SessionDetailsComponent,
+    CreateBulkStaffLinkComponent,
+    StaffSessionsComponent
     
   ],
   imports: [

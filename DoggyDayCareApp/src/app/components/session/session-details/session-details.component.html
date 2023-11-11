@@ -1,0 +1,59 @@
+<div *ngIf="session" class="container">
+    <main>
+        <div class="">
+            <a [title]="'go back'"
+                [routerLink]="['/session-list']">
+                Session List
+            </a>
+          <h4 class="mb-3">Session Details</h4>
+          <form class="needs-validation" (ngSubmit)="editSession(session)" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+
+                <label for="sessionName" class="form-label">Session Name</label>
+                <input type="text" class="form-control" name="sessionName" id="sessionName" [(ngModel)]="this.session.sessionName" placeholder="Session Name" required>
+                <div class="invalid-feedback">
+                  Valid session name is required.
+                </div>
+
+                <label for="sessionDateTime" class="form-label">Session Date Time</label>
+                <input matInput type="datetime-local" class="form-control"  name="sessionDateTime" [(ngModel)]="this.session.sessionDateTime" (ngModelChange)="this.session.sessionDateTime=$event">
+                <div class="invalid-feedback">
+                  Valid startDate is required.
+                </div>
+
+                <label for="sessionType" class="form-label">Session Type</label>
+                <input type="number" class="form-control" name="sessionType"  id="sessionType" [(ngModel)]="this.session.sessionType" placeholder="Session Type"  required>
+                <div class="invalid-feedback">
+                  Valid Session Type is required.
+                </div>
+
+                <label for="sessionLengthInMinutes" class="form-label">Session Type</label>
+                <input type="number" class="form-control" name="sessionLengthInMinutes"  id="sessionLengthInMinutes" [(ngModel)]="this.session.sessionLengthInMinutes" placeholder="Session Length In Minutes"  required>
+                <div class="invalid-feedback">
+                  Valid Session Length is required.
+                </div>
+
+                <label for="sessionSize" class="form-label">Session Size</label>
+                <input type="number" class="form-control" name="sessionSize"  id="sessionSize" [(ngModel)]="this.session.sessionSize" placeholder="Session Size"  required>
+                <div class="invalid-feedback">
+                  Valid Session Size is required.
+                </div>
+
+                <div class="form-group">
+                  <label for="staffList">Staff List</label>
+                  <select multiple class="form-control" id="staffList" name="staffList" [(ngModel)]="this.session.staffList">
+                    <option *ngFor="let staff of possibleStaff" [ngValue]="staff">
+                      {{ staff.title }} {{ staff.forename }} {{ staff.surname }} 
+                      <!-- <button (click) ="removeStaff(staff)"></button> -->
+                 </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <input type="submit" value="Save record" class="btn btn-block">
+            <input type="reset" value="reset record" class="btn btn-block">
+            </form>
+        </div>
+    </main>
+  </div>

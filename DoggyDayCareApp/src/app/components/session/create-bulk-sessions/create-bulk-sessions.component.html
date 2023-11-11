@@ -1,0 +1,85 @@
+<div class="container">
+    <main>
+        <div class="">
+            <a [title]="'go back'"
+                [routerLink]="['/session-list']">
+                Session List
+            </a>
+          <h4 class="mb-3">New Bulk Session</h4>
+          <form class="needs-validation" (ngSubmit)="onSubmitBulk()" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+
+                <div class="form-group">
+                <label for="startDateTime" class="form-label">Session Range Start Date Time</label>
+                <input matInput type="datetime-local" class="form-control"  name="startDateTime" [(ngModel)]="startDateTime" (ngModelChange)="this.startDateTime=$event">
+                <div class="invalid-feedback">
+                  Valid Start Date is required.
+                </div>
+            </div>
+
+                <div class="form-group">
+                <label for="endDate" class="form-label">Session Range End Date</label>
+                <input type="date" class="form-control"  name="endDate" [(ngModel)]="endDate" (ngModelChange)="this.endDate=$event">
+                <div class="invalid-feedback">
+                  Valid End Date is required.
+                </div>
+            </div>
+
+                <div class="form-group">
+                    <label for="weekDaysToInclude">Week Day Selection</label>
+                    <select multiple class="form-control" id="weekDaysToInclude" name="weekDaysToInclude" [(ngModel)]="weekDaysToInclude">
+                      <option *ngFor="let day of daysOfWeek" [ngValue]="day.id">
+                        {{ day.dayName }}
+                   </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="sessionName" class="form-label">Session Name</label>
+                    <input type="text" class="form-control" name="sessionName" id="sessionName" [(ngModel)]="sessionName" placeholder="Session Name" required>
+                    <div class="invalid-feedback">
+                      Valid session name is required.
+                    </div>
+                </div>
+
+                  <div class="form-group">
+                <label for="sessionType" class="form-label">Session Type</label>
+                <input type="number" class="form-control" name="sessionType"  id="sessionType" [(ngModel)]="sessionType" placeholder="Session Type"  required>
+                <div class="invalid-feedback">
+                  Valid Session Type is required.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="sessionLengthInMinutes" class="form-label">Session Type</label>
+                <input type="number" class="form-control" name="sessionLengthInMinutes"  id="sessionLengthInMinutes" [(ngModel)]="sessionLengthInMinutes" placeholder="Session Length In Minutes"  required>
+                <div class="invalid-feedback">
+                  Valid Session Length is required.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="sessionSize" class="form-label">Session Size</label>
+                <input type="number" class="form-control" name="sessionSize"  id="sessionSize" [(ngModel)]="sessionSize" placeholder="Session Size"  required>
+                <div class="invalid-feedback">
+                  Valid Session Size is required.
+                </div>
+            </div>
+                <div class="form-group">
+                    <label for="staffList">Staff List</label>
+                    <select multiple class="form-control" id="staffList" name="staffList" [(ngModel)]="staffList">
+                      <option *ngFor="let staff of possibleStaff" [ngValue]="staff">
+                        {{ staff.title }} {{ staff.forename }} {{ staff.surname }}
+                   </option>
+                    </select>
+                  </div>
+            
+              </div>
+            </div>
+            <input type="submit" value="Save record" class="btn btn-block">
+            <input type="reset" value="reset record" class="btn btn-block">
+            </form>
+        </div>
+    </main>
+  </div>

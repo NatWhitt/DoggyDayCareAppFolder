@@ -1,0 +1,59 @@
+<p>staff-sessions works!</p>
+<form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
+    <div class="row g-3">
+      <div class="col-sm-6">
+
+<label for="startDate" class="form-label">Start Date</label>
+<input type="date" class="form-control"  name="startDate" [(ngModel)]="startDate" (ngModelChange)="this.startDate=$event">
+<div class="invalid-feedback">
+  Valid start date is required.
+</div>
+
+<label for="endDate" class="form-label">End Date</label>
+<input type="date" class="form-control"  name="endDate" [(ngModel)]="endDate" (ngModelChange)="this.endDate=$event">
+<div class="invalid-feedback">
+  Valid end date is required.
+</div>
+
+</div>
+</div>
+<input type="submit" value="Search" class="btn btn-block">
+<input type="reset" value="Reset" class="btn btn-block">
+</form>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope ="col">Session Name</th>
+            <th scope ="col">Session DateTime</th>
+            <th scope ="col">Session Type</th>
+            <th scope ="col">Session Length In Minutes</th>
+            <th scope ="col">Session Size</th>
+            <th scope ="col">Session Staff</th>
+            <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let session of sessions">
+            <td>{{session.id}}</td>
+            <td>{{session.sessionName}}</td>
+            <td>{{session.sessionDateTime| date:'dd/MM/yyyy HH:mm'}}</td>
+            <td>{{session.sessionType}}</td>
+            <td>{{session.sessionLengthInMinutes}}</td>
+            <td>{{session.sessionSize}}</td>
+            <td><span *ngFor="let staff of session.staffList; let last = last" >
+                        <small>
+                            {{ staff.forename }} {{ staff.surname }} 
+                        </small>
+                        <span *ngIf="!last">, </span>
+                    </span></td>
+                <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
+                <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteSessionLink(session)">Confirm Delete</button>
+                <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>
+            
+        </tr>
+    </tbody>
+</table>
