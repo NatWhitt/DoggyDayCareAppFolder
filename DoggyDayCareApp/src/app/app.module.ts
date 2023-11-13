@@ -8,14 +8,14 @@ import { DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { BreedComponent } from './components/breed/breed.component';
-import { DogComponent } from './components/dog components/dog-list/dog-list.component';
-import { DogProfileComponent } from './components/dog components/dog-profile/dog-profile.component';
-import { CreateDogComponent } from './components/dog components/create-dog/create-dog.component';
+import { DogComponent } from './components/dog/dog-list/dog-list.component';
+import { DogProfileComponent } from './components/dog/dog-profile/dog-profile.component';
+import { CreateDogComponent } from './components/dog/create-dog/create-dog.component';
 import { HeaderComponent } from './components/utility/header/header.component';
 import { FooterComponent } from './components/utility/footer/footer.component';
 import { MenuBarComponent } from './components/utility/menu-bar/menu-bar.component';
 import { DogContactListComponent } from './components/contacts/contact-list/dog-contact-list.component';
-import { DogCoreInformationComponent } from './components/dog components/dog-core-information/dog-core-information.component';
+import { DogCoreInformationComponent } from './components/dog/dog-core-information/dog-core-information.component';
 import { CreateContactComponent } from './components/contacts/contact-list/create-contact/create-contact.component';
 import { LinkExistingContactComponent } from './components/contacts/contact-list/link-existing-contact/link-existing-contact.component';
 
@@ -29,6 +29,9 @@ import { CreateBulkSessionsComponent } from './components/session/create-bulk-se
 import { SessionDetailsComponent } from './components/session/session-details/session-details.component';
 import { CreateBulkStaffLinkComponent } from './components/session/create-bulk-staff-link/create-bulk-staff-link.component';
 import { StaffSessionsComponent } from './components/staff/staff-sessions/staff-sessions.component';
+import { SessionBookingsComponent } from './components/session/session-bookings/session-bookings.component';
+import { DogBookingsComponent } from './components/dog/dog-bookings/dog-bookings.component';
+import { DogBulkBookingComponent } from './components/dog/dog-bulk-booking/dog-bulk-booking.component';
 
 
 
@@ -55,7 +58,10 @@ import { StaffSessionsComponent } from './components/staff/staff-sessions/staff-
     CreateBulkSessionsComponent,
     SessionDetailsComponent,
     CreateBulkStaffLinkComponent,
-    StaffSessionsComponent
+    StaffSessionsComponent,
+    SessionBookingsComponent,
+    DogBookingsComponent,
+    DogBulkBookingComponent
     
   ],
   imports: [

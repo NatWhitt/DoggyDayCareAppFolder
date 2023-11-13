@@ -1,5 +1,5 @@
 import { DatePipe, formatDate } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Session } from 'app/models/session';
 import { Staff } from 'app/models/staff';
 import { SessionService } from 'app/services/session.service';
@@ -13,11 +13,23 @@ import { StaffService } from 'app/services/staff.service';
 export class SessionDetailsComponent {
 
   @Input() session!: Session;
-  possibleStaff: Staff[] =[];
+  @Input() possibleStaff: Staff[] =[];
+
   formattedStartDate = '';
+  view = 'details';
+  showSelection : boolean = true;
+
+  @Output() showSelectedSession: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private sessionService: SessionService, private staffService: StaffService, private datePipe: DatePipe){
-    this.staffService.getStaffsByStatus(1).subscribe((staffs)=> this.possibleStaff = staffs)
+
+  }
+  ngOnInit():void{
+console.log(this.session);
+console.log(this.possibleStaff);
+
+
+
   }
   getformattedStartDate() {
     this.datePipe.transform(this.session.sessionDateTime, 'yyyy-MM-ddTHH:mm');
@@ -30,6 +42,12 @@ export class SessionDetailsComponent {
   // removeStaff(removeStaff: Staff){
   //   this.session.staffList?.filter(s => s.id !== removeStaff.id)
   // }
+  setView(page:string){
+    this.view = page;
+  }
 
-
+  hideSelection(){
+    this.showSelection = false;
+    this.showSelectedSession.emit(this.showSelection);
+  }
 }

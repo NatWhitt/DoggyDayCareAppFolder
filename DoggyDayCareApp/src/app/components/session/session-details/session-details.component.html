@@ -1,10 +1,36 @@
-<div *ngIf="session" class="container">
+<div *ngIf="session"class="container">
+  <main>
+    <div class="row">
+      <div >
+        <button (click)="hideSelection()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg> Back to List</button>
+    </div>
+      <div>
+        <div >
+          <h2 class="text-center">{{session.sessionName}} {{session.sessionDateTime}}</h2>
+          <h6 class="text-center">ID: {{session.id}}</h6>
+        </div>
+    </div>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a [ngClass]="view =='details'? 'nav-link active' : 'nav-link'" (click) = "setView('details')">Details</a>
+        </li>
+        <li class="nav-item">
+          <a [ngClass]="view =='bookings'? 'nav-link active' : 'nav-link'" (click) = "setView('bookings')">Bookings</a>
+        </li>
+      </ul>
+
+    <div *ngIf="view =='bookings'">
+      <app-session-bookings [session]="session"></app-session-bookings>
+      </div>
+    </div>
+  </main>
+</div>
+<div *ngIf="session && view =='details'" class="container">
     <main>
         <div class="">
-            <a [title]="'go back'"
-                [routerLink]="['/session-list']">
-                Session List
-            </a>
           <h4 class="mb-3">Session Details</h4>
           <form class="needs-validation" (ngSubmit)="editSession(session)" novalidate>
             <div class="row g-3">

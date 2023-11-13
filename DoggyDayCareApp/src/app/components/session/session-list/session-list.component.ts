@@ -1,7 +1,9 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Session } from 'app/models/session';
+import { Staff } from 'app/models/staff';
 import { SessionService } from 'app/services/session.service';
+import { StaffService } from 'app/services/staff.service';
 
 @Component({
   selector: 'app-session-list',
@@ -11,6 +13,7 @@ import { SessionService } from 'app/services/session.service';
 export class SessionListComponent {
   sessions: Session[] = [];
   session = {} as Session;
+  possibleStaff: Staff[] =[];
 
   startDate!: Date; 
   formattedStartDate!: string;
@@ -20,9 +23,15 @@ export class SessionListComponent {
   showDeleteOptions: boolean = false;
   delete: Boolean = false;
   create: Boolean = false;
-  @Output() currentSession: EventEmitter<Session> = new EventEmitter();
+  view = '';
+  showSelected = false;
 
-  constructor(private sessionService: SessionService, private datePipe: DatePipe){}
+  @Output() currentSession: EventEmitter<Session> = new EventEmitter();
+  @Output() staffList: EventEmitter<Staff[]> = new EventEmitter();
+
+  constructor(private sessionService: SessionService,private staffService: StaffService, private datePipe: DatePipe){
+    this.staffService.getStaffsByStatus(1).subscribe((staffs)=> this.possibleStaff = staffs)
+  }
   
 
   getformattedStartDate() {
@@ -55,8 +64,13 @@ export class SessionListComponent {
 
   selectSession(selectedSession: Session){
     this.session = selectedSession;
-
+    this.staffList.emit(this.possibleStaff);
+    this.showSelected = true;
   }
+  hideSession(status: boolean){
+    this.showSelected = status;
+  }
+
 
 
 }

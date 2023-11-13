@@ -1,25 +1,39 @@
-<div><a [title]="'Create Session'"
-[routerLink]="['/create-session']">
-Create Session
-</a>
-</div>
 <div>
-<a [title]="'Bulk Create Session'"
-[routerLink]="['/create-bulk-session']">
-Bulk Create Session
-</a>
-</div>
-<a [title]="'Bulk Staff Link'"
-[routerLink]="['/create-bulk-staff-link']">
-Bulk Create Staff Links
-</a>
-<div *ngIf="session.id">
-<app-session-details [session]="session"></app-session-details>
+<div *ngIf="session.id && showSelected">
+<app-session-details [session]="session" [possibleStaff]="possibleStaff" (showSelectedSession)="hideSession($event)"></app-session-details>
 </div>
 
+<div class="row" *ngIf="!showSelected">
+    <h2>Session staffList</h2>
+    <div class="col order-2">
+        <h3>Options</h3>
+
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a [title]="'Create Session'"
+                [routerLink]="['/create-session']">
+                Create Session
+                </a>
+            </li>
+            <li class="nav-item">
+                <a [title]="'Bulk Create Session'"
+                [routerLink]="['/create-bulk-session']">
+                Bulk Create Session
+                </a>
+            </li>
+            <li class="nav-item">
+                <a [title]="'Bulk Staff Link'"
+                [routerLink]="['/create-bulk-staff-link']">
+                Bulk Create Staff Links
+                </a>
+            </li>
+          </ul>
+</div>
+<div class="col order-1">
 <form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
     <div class="row g-3">
       <div class="col-sm-6">
+        <h3>Date Search</h3>
 
 <label for="startDate" class="form-label">Start Date</label>
 <input type="date" class="form-control"  name="startDate" [(ngModel)]="startDate" (ngModelChange)="this.startDate=$event">
@@ -38,7 +52,8 @@ Bulk Create Staff Links
 <input type="submit" value="Search" class="btn btn-block">
 <input type="reset" value="Reset" class="btn btn-block">
 </form>
-
+</div>
+</div>
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -68,12 +83,14 @@ Bulk Create Staff Links
                         </small>
                         <span *ngIf="!last">, </span>
                     </span></td>
-                    <button (click) = "selectSession(session)">Edit Session</button>
+                    <button (click) = "selectSession(session)">Select Session</button>
                 <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
                 <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteSession(session)">Confirm Delete</button>
                 <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>
+                
             
         </tr>
     </tbody>
 </table>
+</div>
 
