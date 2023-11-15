@@ -32,6 +32,8 @@ import { StaffSessionsComponent } from './components/staff/staff-sessions/staff-
 import { SessionBookingsComponent } from './components/session/session-bookings/session-bookings.component';
 import { DogBookingsComponent } from './components/dog/dog-bookings/dog-bookings.component';
 import { DogBulkBookingComponent } from './components/dog/dog-bulk-booking/dog-bulk-booking.component';
+import { SessionRegistrationComponent } from './components/registration/session-registration/session-registration.component';
+import { DogRegistrationComponent } from './components/dog/dog-registration/dog-registration.component';
 
 
 
@@ -61,7 +63,9 @@ import { DogBulkBookingComponent } from './components/dog/dog-bulk-booking/dog-b
     StaffSessionsComponent,
     SessionBookingsComponent,
     DogBookingsComponent,
-    DogBulkBookingComponent
+    DogBulkBookingComponent,
+    SessionRegistrationComponent,
+    DogRegistrationComponent
     
   ],
   imports: [

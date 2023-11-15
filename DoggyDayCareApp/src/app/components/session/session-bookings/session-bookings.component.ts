@@ -25,8 +25,6 @@ export class SessionBookingsComponent {
   }
 
   ngOnInit():void{
-    console.log(this.session);
-    
     this.bookingService.getBookingsSingleSession(this.session.id ?? 0).subscribe((booking) => this.bookedDogs = booking);
     this.bookingService.getAllAvailableDogsForSingleSession(this.session.id ?? 0).subscribe((dogs) => this.avilableDogs = dogs);   
   }
