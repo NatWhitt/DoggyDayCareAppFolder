@@ -25,6 +25,7 @@ const routes: Routes = [
   {path: 'create-session', component:CreateSessionComponent},
   {path: 'create-bulk-session', component:CreateBulkSessionsComponent},
   {path: 'create-bulk-staff-link', component:CreateBulkStaffLinkComponent}
+  {path: '**', component: SessionListComponent},
 ];
 
 @NgModule({
