@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-import {HttpClientModule} from '@angular/common/http'
-import {FormsModule} from '@angular/forms'
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
@@ -32,8 +32,9 @@ import { StaffSessionsComponent } from './components/staff/staff-sessions/staff-
 import { SessionBookingsComponent } from './components/session/session-bookings/session-bookings.component';
 import { DogBookingsComponent } from './components/dog/dog-bookings/dog-bookings.component';
 import { DogBulkBookingComponent } from './components/dog/dog-bulk-booking/dog-bulk-booking.component';
-import { SessionRegistrationComponent } from './components/registration/session-registration/session-registration.component';
+import { SessionRegistrationComponent } from './components/session/session-registration/session-registration.component';
 import { DogRegistrationComponent } from './components/dog/dog-registration/dog-registration.component';
+import { TakeRegistrationComponent } from './components/registration/take-registration/take-registration.component';
 
 
 
@@ -65,7 +66,8 @@ import { DogRegistrationComponent } from './components/dog/dog-registration/dog-
     DogBookingsComponent,
     DogBulkBookingComponent,
     SessionRegistrationComponent,
-    DogRegistrationComponent
+    DogRegistrationComponent,
+    TakeRegistrationComponent
     
   ],
   imports: [
@@ -73,7 +75,7 @@ import { DogRegistrationComponent } from './components/dog/dog-registration/dog-
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule,
+    FormsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

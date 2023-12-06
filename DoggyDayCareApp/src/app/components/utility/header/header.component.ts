@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent {
 
-  title: string = 'Doggy Day Carer';
+  title: string = 'Doggy Day Care';
   showAddTask: boolean;
   subscription: Subscription;
 

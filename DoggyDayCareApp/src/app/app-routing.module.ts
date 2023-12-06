@@ -11,9 +11,10 @@ import { SessionListComponent } from './components/session/session-list/session-
 import { CreateSessionComponent } from './components/session/create-session/create-session.component';
 import { CreateBulkSessionsComponent } from './components/session/create-bulk-sessions/create-bulk-sessions.component';
 import { CreateBulkStaffLinkComponent } from './components/session/create-bulk-staff-link/create-bulk-staff-link.component';
+import { TakeRegistrationComponent } from './components/registration/take-registration/take-registration.component';
 
 const routes: Routes = [
-  {path: '', component: SessionListComponent},
+  {path: '', component: TakeRegistrationComponent},
   {path: 'breeds', component: BreedComponent},
   {path: 'dog-list', component: DogComponent},
   {path: 'dog-profile/:id', component:DogProfileComponent},
@@ -24,8 +25,9 @@ const routes: Routes = [
   {path: 'session-list', component:SessionListComponent},
   {path: 'create-session', component:CreateSessionComponent},
   {path: 'create-bulk-session', component:CreateBulkSessionsComponent},
-  {path: 'create-bulk-staff-link', component:CreateBulkStaffLinkComponent}
-  {path: '**', component: SessionListComponent},
+  {path: 'create-bulk-staff-link', component:CreateBulkStaffLinkComponent},
+  {path: 'take-registration', component:TakeRegistrationComponent},
+  {path: '**', component: TakeRegistrationComponent}
 ];
 
 @NgModule({

@@ -71,6 +71,23 @@ export class SessionService {
     }),
     catchError(this.handleError));
   } 
+  getDaySessionDetails(startDate: string) : Observable<Session[]>{
+    const params = new HttpParams()
+   .set('date', startDate);
+    return this.http.get<Session[]>(`${environment.apiUrl}/${this.controller}/Day/Details`, {params})
+    .pipe(map(responseData =>{
+      const data = [];
+      for(const key in responseData){
+        if(responseData.hasOwnProperty(key)){
+          if(key== "data"){
+            data.push(...((responseData as any)[key]))
+          }
+        }
+      }
+      return data
+    }),
+    catchError(this.handleError));
+  } 
   getSession(id: number) : Observable<Session>{
     return this.http.get<Session>(`${environment.apiUrl}/${this.controller}/${id}`)
     .pipe(map((responseData:any)=>{

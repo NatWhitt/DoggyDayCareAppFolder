@@ -35,15 +35,10 @@ export class SessionListComponent {
   
 
   getformattedStartDate() {
-    // return this.datePipe.transform(this.startDate, 'dd-MM-yyyy');
     this.formattedStartDate = formatDate(this.startDate, 'yyyy-MM-dd hh:mm:ssZZZZZ', 'en_US')
-    // return this.datePipe.transform(this.endDate, 'dd-MM-yyyy');
     this.formattedEndDate = formatDate(this.endDate, 'yyyy-MM-dd hh:mm:ssZZZZZ', 'en_US')
   }
-  // getformattedEndDate() {
-  //   // return this.datePipe.transform(this.endDate, 'dd-MM-yyyy');
-  //   return this.formattedEndDate = formatDate(this.endDate, 'yyyy-MM-dd hh:mm:ssZZZZZ', 'en_US')
-  // }
+
  
   getSessions(){
     this.getformattedStartDate();
