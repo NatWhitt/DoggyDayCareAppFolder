@@ -1,32 +1,46 @@
-<h1>Staff</h1>
-<div class="">
-    <a [title]="'Create Staff'"
-                [routerLink]="['/create-staff']">
-                Create Staff
-            </a>
-<table class="table">
-    <thead class="thead-dark">
+<div class="container">
+    <div class="row mt-2 align-middle">
+    <div class="col 4"></div> 
+    <div class="col 4 border rounded-pill bg-white" >
+        <h2 class="text-center align-middle">Staff List</h2>
+    </div>
+    <div class="col 4 align-middle">
+      <div class="dropdown me-2 align-middle">
+      <button class="btn btn-info dropdown-toggle float-end" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Options
+      </button>
+      <ul class="dropdown-menu">
+        <li ><a *ngIf="!showDeleteOptions" class="dropdown-item" (click)="showDelete()">Show Delete</a></li>
+        <li ><a *ngIf="showDeleteOptions" class="dropdown-item" (click)="showDelete()">Hide Delete</a></li>
+        <li><a class="dropdown-item" [title]="'Create Dog'" [routerLink]="['/create-staff']"> Create</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row m-2 p-1 border rounded bg-white">
+    <table class="table table-hover">
+        <thead class="table-light">
         <tr>
             <th scope="col">Id</th>
             <th scope ="col">Title</th>
             <th scope ="col">Forename</th>
             <th scope ="col">Surname</th>
             <th scope ="col">Start Date</th>
-            <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
+            <th scope ="col" *ngIf="showDeleteOptions">Delete</th>
         </tr>
     </thead>
 
-    <tbody>
+    <tbody class="table-group-divider">
         <tr *ngFor="let staff of staffs">
-            <td>{{staff.id}}</td>
+            <td><a [title]="'SelectStaff'"
+                [routerLink]="['/staff-profile',staff.id]">
+                {{staff.id}}
+            </a></td>
             <td>{{staff.title}}</td>
             <td>{{staff.forename}}</td>
             <td>{{staff.surname}}</td>
             <td>{{staff.startDate | date:'dd/MM/yyyy'}}</td>
-            <td> <a [title]="'SelectStaff'"
-                [routerLink]="['/staff-profile',staff.id]">
-                Select Staff
-            </a>
+            <td *ngIf="showDeleteOptions">
                 <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
                 <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteStaff(staff)">Confirm Delete</button>
                 <button *ngIf="showDeleteOptions && delete"type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>

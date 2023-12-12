@@ -13,13 +13,14 @@ import { RegistrationService } from 'app/services/registration.service';
 })
 export class SessionRegistrationComponent {
   @Input() session!: Session;
+  @Input() showEditOptions: boolean = false;
+  @Input() showDeleteOptions: boolean = false;
   bookingReg: BookingWithRegistration[] = [];
   registrationDetails: RegistrationTake[] = [];
   statuses: String[];
   statusEnum = RegistrationStatusEnum;
 
-  showEditOptions: boolean = false;
-  showDeleteOptions: boolean = false;
+
   delete: boolean = false;
 
   constructor(private registrationService: RegistrationService){
@@ -29,10 +30,16 @@ export class SessionRegistrationComponent {
   ngOnInit():void{
     this.registrationService.getPossibleRegistrationsSingleSession(this.session.id ?? 0).subscribe((bookingReg) => this.bookingReg = bookingReg)
   }
-  
-  showEdit(){
-    this.showEditOptions = !this.showEditOptions;
-  }
+
+  remainingAsPresent(){
+    this.bookingReg.forEach(registration => {
+      if(registration.registrationDetails.registrationStatus.length == 0){
+        console.log(registration);
+        registration.registrationDetails.registrationStatus = 'Present'
+        console.log(registration);
+      }      
+    });
+  } 
 
   saveRegistration(){
     this.registrationDetails =[];
@@ -49,11 +56,6 @@ export class SessionRegistrationComponent {
     })
     this.registrationService.bulkCreateRegistration(this.registrationDetails).subscribe();    
     this.showEditOptions = false;
-  }
-
-
-  showDelete(){
-    this.showDeleteOptions = !this.showDeleteOptions;
   }
 
 

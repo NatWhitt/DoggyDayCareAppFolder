@@ -1,56 +1,96 @@
 <div *ngIf="session" class="container">
-    <button *ngIf="!showCreateForm || bookedDogs" type="button" class="btn btn-danger" (click) = "showCreate()">Show Create</button>
-    <button *ngIf="showCreateForm || !bookedDogs" type="button" class="btn btn-primary" (click) = "showCreate()">Cancel Create</button>
-    <div *ngIf="showCreateForm || !bookedDogs" class="col-4">
+  <div class="row">
+    <div *ngIf="showCreateForm || !bookedDogs" class="row">
+      <div>
         <form class="add-form" (ngSubmit)="createBooking()" novalidate>
+          <div class="form-group mb-1">
             <label for="newBookingDog" class="form-label">Dog</label>
-            <select class="form-select" name="newBookingDog" id="newBookingDog" [(ngModel)]="newBookingDog" required>
-              <option *ngFor="let dog of avilableDogs" [ngValue]="dog">{{dog.forename}} {{dog.surname}}
+            <select
+              class="form-select"
+              name="newBookingDog"
+              id="newBookingDog"
+              [(ngModel)]="newBookingDog"
+              required
+            >
+              <option *ngFor="let dog of avilableDogs" [ngValue]="dog">
+                {{ dog.forename }} {{ dog.surname }}
+              </option>
             </select>
-            <div class="invalid-feedback">
-              Please select a dog.
-            </div>
-            <input type="submit" value="Create Booking" class="btn btn-primary">
-            <input type="reset" value="Reset Record" class="btn btn-block">
-            
+          </div>
+          <div class="invalid-feedback">Please select a dog.</div>
+          <input
+            type="submit"
+            value="Create Booking"
+            class="btn btn-primary m-1"
+          />
+          <input
+            type="reset"
+            value="Reset Record"
+            class="btn btn-secondary m-1"
+          />
         </form>
+      </div>
     </div>
-
+    <div class="row">
     <div *ngIf="bookedDogs">
-    <table class="table">
-    <thead class="thead-dark">
-        <tr>
+      <table class="table table-hover">
+        <thead class="table-light">
+          <tr>
             <th scope="col">Id</th>
-            <th scope ="col">Forename</th>
-            <th scope ="col">Surname</th>
-            <th scope ="col">Breed</th>
-            <th scope ="col">Description</th>
-            <th scope ="col">DOB</th>
-            <th scope ="col">Start Date</th>
-            <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
-            
-        </tr>
-    </thead>
+            <th scope="col">Forename</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Breed</th>
+            <th scope="col">Description</th>
+            <th scope="col">DOB</th>
+            <th scope="col">Start Date</th>
+            <th scope="col" *ngIf="showDeleteOptions">Delete</th>
+          </tr>
+        </thead>
 
-    <tbody>
-        <tr *ngFor="let dog of bookedDogs">
-            <td>{{dog.id}}</td>
-            <td>{{dog.forename}}</td>
-            <td>{{dog.surname}}</td>
-            <td>{{dog.breed.name}}</td>
-            <td>{{dog.description}}</td>
-            <td>{{dog.dob | date:'dd/MM/yyyy'}}</td>
-            <td>{{dog.startDate | date:'dd/MM/yyyy'}}</td>
-            <td> <a [title]="'SelectDog'"
-                [routerLink]="['/dog-profile',dog.id]">
-                View Dog Profile
-            </a>
-                <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
-                <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteBooking(dog)">Confirm Delete</button>
-                <button *ngIf="showDeleteOptions && delete"type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let dog of bookedDogs">
+            <td>
+              <a [title]="'SelectDog'" [routerLink]="['/dog-profile', dog.id]">
+                {{ dog.id }}
+              </a>
             </td>
-        </tr>
-    </tbody>
-</table>
+            <td>{{ dog.forename }}</td>
+            <td>{{ dog.surname }}</td>
+            <td>{{ dog.breed.name }}</td>
+            <td>{{ dog.description }}</td>
+            <td>{{ dog.dob | date : "dd/MM/yyyy" }}</td>
+            <td>{{ dog.startDate | date : "dd/MM/yyyy" }}</td>
+            <td *ngIf="showDeleteOptions">
+              <!-- <button (click) = "selectSession(session)">Select Session</button>  -->
+              <button
+                *ngIf="showDeleteOptions && !delete"
+                type="button"
+                class="btn btn-danger"
+                (click)="deleteButton()"
+              >
+                Delete
+              </button>
+              <button
+                *ngIf="showDeleteOptions && delete"
+                type="button"
+                class="btn btn-danger"
+                (click)="deleteBooking(dog)"
+              >
+                Confirm Delete
+              </button>
+              <button
+                *ngIf="showDeleteOptions && delete"
+                type="button"
+                class="btn btn-primary"
+                (click)="deleteButton()"
+              >
+                Cancel
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 </div>

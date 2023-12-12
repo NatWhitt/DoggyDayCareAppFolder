@@ -1,21 +1,24 @@
 <div *ngIf="session" class="container">
-    <button *ngIf="!showEditOptions" type="button" class="btn btn-info" (click) = "showEdit()">Edit Registration</button>
-    <button *ngIf="showEditOptions" type="button" class="btn btn-info" (click) = "saveRegistration()">Update Registrations</button>
-    <button *ngIf="showEditOptions" type="button" class="btn btn-info" (click) = "showEdit()">Cancel Registration Edit</button>
-    <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
-<div>
-    <table class="table">
-        <thead class="thead-dark">
-            <th>ID</th>
-            <th>Session Name</th>
-            <th>Session Time</th>
-            <th>Dog Name</th>
-            <th>Status</th>
-            <th>Note</th>
-            <th *ngIf="showDeleteOptions"></th>
+    <div class="row">
+        <div *ngIf="bookingReg.length >0 && showEditOptions" class="col-2">
+            <button type="button" class="btn btn-info m-1" (click)="remainingAsPresent()">
+              Mark Present
+            </button>
+          </div>
+    <table class="table table-hover">
+        <thead class="table-light">
+            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Session Name</th>
+            <th scope="col">Session Time</th>
+            <th scope="col">Dog Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Note</th>
+            <th scope="col" *ngIf="showDeleteOptions"></th>
+        </tr>
         </thead>
 
-        <tbody>
+        <tbody class="table-group-divider">
             <tr *ngFor="let booking of bookingReg">
             <td>{{booking.id}}</td>
             <td>{{booking.session.sessionName}}</td>
@@ -42,6 +45,15 @@
             </tr>
         </tbody>
     </table>
+    <div *ngIf="bookingReg.length >0 && showEditOptions"  class="row">
+        <div>
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="saveRegistration()"
+        >
+          Update Registrations
+        </button>
+      </div>
 </div>
-
 </div>

@@ -64,11 +64,16 @@ export class DogBookingsComponent {
     if(this.view != 'create'){
       this.view = 'create';
     }
+    else{
+    this.view = 'list'
+    }
   }
   showBulkCreate(){
     if(this.view != 'bulkCreate'){
       this.view = 'bulkCreate';
     }
+    else{this.view = 'list'}
+    
   }
 
   createBooking(){

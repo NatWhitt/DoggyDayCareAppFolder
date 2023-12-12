@@ -1,76 +1,181 @@
 <div class="container">
-    <div class="col order-2">
-    <h3>Options</h3>
-    <button *ngIf="!showEditOptions" type="button" class="btn btn-info" (click) = "showEdit()">Edit Registration</button>
-    <button *ngIf="showEditOptions" type="button" class="btn btn-info" (click) = "saveRegistration()">Update Registrations</button>
-    <button *ngIf="showEditOptions" type="button" class="btn btn-info" (click) = "showEdit()">Cancel Registration Edit</button>
-    <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
-</div>
-
-<div class="col order-1">
-    <form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
-        <div class="row g-3">
-          <div class="col-sm-6">
+  <div class="row border rounded">
+    <div class="col-10">
+      <form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
+        <div class="row">
+          <div class="col-sm-10">
             <h3>Date Search</h3>
-    
-    <label for="startDate" class="form-label">Start Date</label>
-    <input type="date" class="form-control"  name="startDate" [(ngModel)]="startDate" (ngModelChange)="this.startDate=$event">
-    <div class="invalid-feedback">
-      Valid start date is required.
-    </div>
-    
-    <label for="endDate" class="form-label">End Date</label>
-    <input type="date" class="form-control"  name="endDate" [(ngModel)]="endDate" (ngModelChange)="this.endDate=$event">
-    <div class="invalid-feedback">
-      Valid end date is required.
-    </div>
-    
-    </div>
-    </div>
-    <input type="submit" value="Search" class="btn btn-block">
-    <input type="reset" value="Reset" class="btn btn-block">
-    </form>
-    </div>
 
-<div>
-    <table class="table">
-        <thead class="thead-dark">
-            <th>ID</th>
-            <th>Session Name</th>
-            <th>Session Time</th>
-            <th>Dog Name</th>
-            <th>Status</th>
-            <th>Note</th>
-            <th *ngIf="showDeleteOptions"></th>
-        </thead>
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="startDate" class="form-label">Start Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="startDate"
+                  [(ngModel)]="startDate"
+                  (ngModelChange)="this.startDate = $event"
+                />
+                <div class="invalid-feedback">
+                  Valid start date is required.
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label for="endDate" class="form-label">End Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="endDate"
+                  [(ngModel)]="endDate"
+                  (ngModelChange)="this.endDate = $event"
+                />
+                <div class="invalid-feedback">Valid end date is required.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="submit" value="Search" class="btn btn-primary m-1" />
+        <input type="reset" value="Reset" class="btn btn-warning m-1" />
+      </form>
+    </div>
+    <div class="col-2">
+      <div class="dropdown my-2 float-end">
+        <button
+          class="btn btn-info dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Options
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a
+              *ngIf="!showDeleteOptions"
+              class="dropdown-item"
+              (click)="showDelete()"
+              >Show Delete</a
+            >
+          </li>
+          <li>
+            <a
+              *ngIf="showDeleteOptions"
+              class="dropdown-item"
+              (click)="showDelete()"
+              >Hide Delete</a
+            >
+          </li>
+          <li>
+            <a
+              *ngIf="!showEditOptions"
+              class="dropdown-item"
+              (click)="showEdit()"
+              >Edit Registration</a
+            >
+          </li>
+          <li>
+            <a
+              *ngIf="showEditOptions"
+              class="dropdown-item"
+              (click)="saveRegistration()"
+              >Update Registrations</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row border rounded p-1 my-2">
+    <table class="table table-hover">
+      <thead>
+        <th scope="col">ID</th>
+        <th scope="col">Session Name</th>
+        <th scope="col">Session Time</th>
+        <th scope="col">Dog Name</th>
+        <th scope="col">Status</th>
+        <th scope="col">Note</th>
+        <th scope="col" *ngIf="showDeleteOptions"></th>
+      </thead>
 
-        <tbody>
-            <tr *ngFor="let booking of bookingReg">
-            <td>{{booking.id}}</td>
-            <td>{{booking.session.sessionName}}</td>
-            <td>{{booking.session.sessionDateTime}}</td>
-            <td>{{booking.dog.forename}} {{booking.dog.surname}}</td>
-            <td> 
-                <span *ngIf="!showEditOptions" >{{booking.registrationDetails.registrationStatus}}</span>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let booking of bookingReg">
+          <td>{{ booking.id }}</td>
+          <td>{{ booking.session.sessionName }}</td>
+          <td>{{ booking.session.sessionDateTime | date : "dd/MM/yyyy HH:mm" }}</td>
+          <td>{{ booking.dog.forename }} {{ booking.dog.surname }}</td>
+          <td>
+            <span *ngIf="!showEditOptions">{{
+              booking.registrationDetails.registrationStatus
+            }}</span>
             <span *ngIf="showEditOptions">
-                <select class="form-select" name="registrationstatus" id="pregistrationstatusresent" [(ngModel)]="booking.registrationDetails.registrationStatus" required>
-                    <option *ngFor="let status of statuses" [value]="status">{{status}}</option>
-                  </select>
-                </span>
-            <td>
-                <span *ngIf="!showEditOptions" >{{booking.registrationDetails.note}}</span>
+              <select
+                class="form-select"
+                name="registrationstatus"
+                id="pregistrationstatusresent"
+                [(ngModel)]="booking.registrationDetails.registrationStatus"
+                required
+              >
+                <option *ngFor="let status of statuses" [value]="status">
+                  {{ status }}
+                </option>
+              </select>
+            </span>
+          </td>
+
+          <td>
+            <span *ngIf="!showEditOptions">{{
+              booking.registrationDetails.note
+            }}</span>
             <span *ngIf="showEditOptions">
-                <input type="text" name="note"id="text" [(ngModel)]="booking.registrationDetails.note" value="{{booking.registrationDetails.note}}" placeholder="Note">
-                </span>
-            </td>
-            <td *ngIf="showDeleteOptions">                
-                <button  *ngIf="!delete" type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
-                <button *ngIf="delete"  type="button" class="btn btn-danger" (click) = "deleteRegistration(booking.registrationDetails.id ?? 0)">Confirm Delete</button>
-                <button *ngIf="delete"type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>
-            </td>
-            </tr>
-        </tbody>
-    </table>
+              <input
+                type="text"
+                name="note"
+                id="text"
+                [(ngModel)]="booking.registrationDetails.note"
+                value="{{ booking.registrationDetails.note }}"
+                placeholder="Note"
+              />
+            </span>
+          </td>
+          <td *ngIf="showDeleteOptions">
+            <button
+              *ngIf="!delete"
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteButton()"
+            >
+              Delete
+            </button>
+            <button
+              *ngIf="delete"
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteRegistration(booking.registrationDetails.id ?? 0)"
+            >
+              Confirm Delete
+            </button>
+            <button
+              *ngIf="delete"
+              type="button"
+              class="btn btn-primary"
+              (click)="deleteButton()"
+            >
+              Cancel
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <div>
+
 </div>
-
+    </table>
+    <div class="p-1 mb-2">
+    <button
+    *ngIf="showEditOptions"              type="button"
+    class="btn btn-success float-end"
+    (click)="saveRegistration()"
+    >Update Registrations</button
+  >
+</div>
+  </div>
 </div>

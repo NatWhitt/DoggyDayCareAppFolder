@@ -1,16 +1,17 @@
-<div class="container .bg-body-secondary">
-  <div class="row border">
+<div class="container bg-body text-body border">
+  <div class="row bg-body-tertiary ">
     <app-header></app-header>
   </div>
   <div class="row">
-    <div class="col-2 border">
+    <!-- <div class="col-2" [ngStyle]="{'background-image':'url(https://pixabay.com/get/g847ec28f230c6df5dcb80452f40d8ca4a97b890069a8c60f717115c8fefc79788970729447bf592acedebb951aea9b2c9b5314f3f6b1b44308e8d79a35997d2f066a53fee4f0645f61ffd5a7b4f34a9c_640.jpg)', display: 'block'}"> -->
+      <div class="col-2 bg-body-tertiary ">
       <app-menu-bar></app-menu-bar>
     </div>
-    <div class="col-10 border">
+    <div class="col m-2 bg-body-tertiary border rounded">
     <router-outlet></router-outlet>
   </div>
   </div>
-  <div class="row border">
+  <!-- <div class="row bg-body-tertiary">
     <app-footer></app-footer>
-  </div>
+  </div> -->
   </div>

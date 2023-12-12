@@ -1,17 +1,26 @@
-<div class="">
-    <button type="button" class="btn btn-warning" (click) = "createButton()">Add new Contact</button>
+<div class="container">
+    <div class="dropdown my-2 float-end">
+        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Options
+        </button>
+        <ul class="dropdown-menu">
+          <li ><a *ngIf="!showDeleteOptions" class="dropdown-item" (click)="showDelete()">Show Delete </a></li>
+          <li ><a *ngIf="showDeleteOptions" class="dropdown-item" (click)="showDelete()">Hide Delete </a></li>
+          <li><a class="dropdown-item" (click) = "createButton()">Add new Contact </a></li>
+        </ul>
+      </div>
     <app-create-contact *ngIf="(create)" [selectedDog] = "currentDog" (statusEvent)="handleCreateNewForm($event)"></app-create-contact>
     <app-link-existing-contact *ngIf="(create)" [selectedDog] = "currentDog" (statusEvent)="handleCreateNewForm($event)"></app-link-existing-contact>
-<table class="table">
-    <thead class="thead-dark">
+<table class="table table-bordered m-2 align-middle">
+    <thead class="thead-light">
         <tr>
             <th scope="col">Id</th>
             <th scope ="col">Title</th>
             <th scope ="col">Forename</th>
             <th scope ="col">Surname</th>
-            <th scope ="col">phoneNumber</th>
-            <th scope ="col">email</th>
-            <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
+            <th scope ="col">Phone Number</th>
+            <th scope ="col">Email</th>
+            <th scope ="col" *ngIf="showDeleteOptions">Delete</th>
         </tr>
     </thead>
 
@@ -23,7 +32,7 @@
             <td>{{contact.surname}}</td>
             <td>{{contact.phoneNumber}}</td>
             <td>{{contact.email}}</td>
-            <td>
+            <td *ngIf="showDeleteOptions">
 
                 <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
                 <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteContact(contact)">Confirm Delete</button>

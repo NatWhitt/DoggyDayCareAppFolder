@@ -1,59 +1,142 @@
-<p>staff-sessions works!</p>
-<form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
-    <div class="row g-3">
-      <div class="col-sm-6">
+<div class="container">
+    <div class="row g-3 border rounded">
+        <div class="col-10 rounded bg-white">
+  <form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
 
-<label for="startDate" class="form-label">Start Date</label>
-<input type="date" class="form-control"  name="startDate" [(ngModel)]="startDate" (ngModelChange)="this.startDate=$event">
-<div class="invalid-feedback">
-  Valid start date is required.
-</div>
 
-<label for="endDate" class="form-label">End Date</label>
-<input type="date" class="form-control"  name="endDate" [(ngModel)]="endDate" (ngModelChange)="this.endDate=$event">
-<div class="invalid-feedback">
-  Valid end date is required.
-</div>
-
-</div>
-</div>
-<input type="submit" value="Search" class="btn btn-block">
-<input type="reset" value="Reset" class="btn btn-block">
-</form>
-
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Id</th>
-            <th scope ="col">Session Name</th>
-            <th scope ="col">Session DateTime</th>
-            <th scope ="col">Session Type</th>
-            <th scope ="col">Session Length In Minutes</th>
-            <th scope ="col">Session Size</th>
-            <th scope ="col">Session Staff</th>
-            <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
+        <div class="row g-3">
+          <div class="col-sm-10">
             
-        </tr>
+            <h3>Date Search</h3>
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="startDate" class="form-label">Start Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="startDate"
+                  [(ngModel)]="startDate"
+                  (ngModelChange)="this.startDate = $event"
+                />
+                <div class="invalid-feedback">
+                  Valid start date is required.
+                </div>
+              </div>
+
+
+
+
+
+          <div class="col-sm-6">
+            <label for="endDate" class="form-label">End Date</label>
+            <input
+              type="date"
+              class="form-control"
+              name="endDate"
+              [(ngModel)]="endDate"
+              (ngModelChange)="this.endDate = $event"
+            />
+            <div class="invalid-feedback">Valid end date is required.</div>
+          </div>
+        </div>
+        </div>
+    </div>
+
+
+    <input type="submit" value="Search" class="btn btn-primary m-1" />
+    <input type="reset" value="Reset" class="btn btn-warning m-1" />
+
+
+  </form>
+</div>
+
+  <div class="col-2">
+    <div class="dropdown my-2 float-end">
+      <button
+        class="btn btn-info dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Options
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a
+            *ngIf="!showDeleteOptions"
+            class="dropdown-item"
+            (click)="showDelete()"
+            >Show Delete</a
+          >
+        </li>
+        <li>
+          <a
+            *ngIf="showDeleteOptions"
+            class="dropdown-item"
+            (click)="showDelete()"
+            >Hide Delete</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row border rounded p-1 my-2">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Session Name</th>
+        <th scope="col">Session DateTime</th>
+        <th scope="col">Session Type</th>
+        <th scope="col">Session Length In Minutes</th>
+        <th scope="col">Session Size</th>
+        <th scope="col">Session Staff</th>
+        <th scope="col" *ngIf="showDeleteOptions">Delete</th>
+      </tr>
     </thead>
 
     <tbody>
-        <tr *ngFor="let session of sessions">
-            <td>{{session.id}}</td>
-            <td>{{session.sessionName}}</td>
-            <td>{{session.sessionDateTime| date:'dd/MM/yyyy HH:mm'}}</td>
-            <td>{{session.sessionType}}</td>
-            <td>{{session.sessionLengthInMinutes}}</td>
-            <td>{{session.sessionSize}}</td>
-            <td><span *ngFor="let staff of session.staffList; let last = last" >
-                        <small>
-                            {{ staff.forename }} {{ staff.surname }} 
-                        </small>
-                        <span *ngIf="!last">, </span>
-                    </span></td>
-                <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
-                <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteSessionLink(session)">Confirm Delete</button>
-                <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>
-            
-        </tr>
+      <tr *ngFor="let session of sessions">
+        <td>{{ session.id }}</td>
+        <td>{{ session.sessionName }}</td>
+        <td>{{ session.sessionDateTime | date : "dd/MM/yyyy HH:mm" }}</td>
+        <td>{{ session.sessionType }}</td>
+        <td>{{ session.sessionLengthInMinutes }}</td>
+        <td>{{ session.sessionSize }}</td>
+        <td>
+          <span *ngFor="let staff of session.staffList; let last = last">
+            <small> {{ staff.forename }} {{ staff.surname }} </small>
+            <span *ngIf="!last">, </span>
+          </span>
+        </td>
+        <td *ngIf="showDeleteOptions"><button
+          *ngIf="showDeleteOptions && !delete"
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteButton()"
+        >
+          Delete
+        </button>
+        <button
+          *ngIf="showDeleteOptions && delete"
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteSessionLink(session)"
+        >
+          Confirm Delete
+        </button>
+        <button
+          *ngIf="showDeleteOptions && delete"
+          type="button"
+          class="btn btn-primary"
+          (click)="deleteButton()"
+        >
+          Cancel
+        </button>
+    </td>
+      </tr>
     </tbody>
-</table>
+  </table>
+</div>
+</div>

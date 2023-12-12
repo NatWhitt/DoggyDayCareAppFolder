@@ -1,59 +1,96 @@
-<div *ngIf="dog"class="container">
-    <main>
-        <div class="row">
-          <div>
-            <div >
-              <a class="btn btn-primary btn-sm" [title]="'Dog List'"
-            [routerLink]="['/dog-list']">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
-            </svg> Back to List</a>
-          </div>
-            <div >
-              <h2 class="text-center">{{dog.forename}} {{dog.surname}}</h2>
-              <h6 class="text-center">ID: {{dog.id}}</h6>
-            </div>
-        </div>
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a [ngClass]="view =='core'? 'nav-link active' : 'nav-link'" (click) = "setView('core')">Core</a>
-            </li>
-            <li class="nav-item">
-              <a [ngClass]="view =='contact'? 'nav-link active' : 'nav-link'" (click) = "setView('contact')">Contacts</a>
-            </li>
-            <li class="nav-item">
-              <a [ngClass]="view =='bookings'? 'nav-link active' : 'nav-link'" (click) = "setView('bookings')">Bookings</a>
-            </li>
-            <li class="nav-item">
-              <a [ngClass]="view =='registration'? 'nav-link active' : 'nav-link'" (click) = "setView('registration')">Registration</a>
-            </li>
-          </ul>
-          <div *ngIf="view =='core'">
-          <app-dog-core-information [dog]="dog"></app-dog-core-information>
-        </div>
-        <div *ngIf="view =='contact'">
-            <app-contact-list [currentDog] = "dog"></app-contact-list>
-          </div>
-          <div *ngIf="view =='bookings'">
-            <app-dog-bookings [currentDog] = "dog"></app-dog-bookings>
-          </div>
-          <div *ngIf="view =='registration'">
-            <app-dog-registration [currentDog] = "dog"></app-dog-registration>
-          </div>
-        </div>
-    </main>
-  </div>
-  <ng-container *ngIf="!dog">
-    <div class="card text-white bg-danger mb-3">
-      <div class="card-header">
-        Error {{this.errorStatus}}
-      </div>
-      <div class="card-body dan">
-        <h5 class="card-title">{{this.errorMessage}}</h5>
-        <p class="card-text">Please go back to the list and try again</p>
-        <a class="btn btn-primary"[title]="'Dog List'"
-          [routerLink]="['/dog-list']">
-          Dog List</a>
+<div *ngIf="dog" class="container">
+  <div class="row mt-2">
+    <div class="col-4">
+      <div>
+        <a
+          class="btn btn-primary btn-sm"
+          [title]="'Dog List'"
+          [routerLink]="['/dog-list']"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-arrow-left"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+            ></path>
+          </svg>
+          Back to List</a
+        >
       </div>
     </div>
-      </ng-container>
+    <div class="co-4 border rounded-pill bg-white">
+      <h2 class="text-center">
+        {{ dog.forename }} {{ dog.surname }} ({{ dog.id }})
+      </h2>
+    </div>
+    <div class="col-4"></div>
+  </div>
+  <main>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a
+          [ngClass]="view == 'core' ? 'nav-link active' : 'nav-link'"
+          (click)="setView('core')"
+          >Core</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          [ngClass]="view == 'contact' ? 'nav-link active' : 'nav-link'"
+          (click)="setView('contact')"
+          >Contacts</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          [ngClass]="view == 'bookings' ? 'nav-link active' : 'nav-link'"
+          (click)="setView('bookings')"
+          >Bookings</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          [ngClass]="view == 'registration' ? 'nav-link active' : 'nav-link'"
+          (click)="setView('registration')"
+          >Registration</a
+        >
+      </li>
+    </ul>
+    <div class="row py-2 border rounded bg-white">
+      <div *ngIf="view == 'core'">
+        <app-dog-core-information [dog]="dog"></app-dog-core-information>
+      </div>
+      <div *ngIf="view == 'contact'">
+        <app-contact-list [currentDog]="dog"></app-contact-list>
+      </div>
+      <div *ngIf="view == 'bookings'">
+        <app-dog-bookings [currentDog]="dog"></app-dog-bookings>
+      </div>
+      <div *ngIf="view == 'registration'">
+        <app-dog-registration [currentDog]="dog"></app-dog-registration>
+      </div>
+    </div>
+  </main>
+</div>
+<ng-container *ngIf="!dog">
+  <div class="card text-white bg-danger mb-3">
+    <div class="card-header">Error {{ this.errorStatus }}</div>
+    <div class="card-body dan">
+      <h5 class="card-title">{{ this.errorMessage }}</h5>
+      <p class="card-text">Please go back to the list and try again</p>
+      <a
+        class="btn btn-primary"
+        [title]="'Dog List'"
+        [routerLink]="['/dog-list']"
+      >
+        Dog List</a
+      >
+    </div>
+  </div>
+</ng-container>

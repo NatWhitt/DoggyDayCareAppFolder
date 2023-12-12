@@ -1,67 +1,178 @@
-<div *ngIf="dog"class="container">
-    <main>
-        <div class="">
-          <h4 class="mb-3">Dog Record</h4>    
-          <a class="btn btn-primary" [title]="'Dog List'"
-          [routerLink]="['/dog-list']">
-          Dog List</a>
-          <!-- change to lock icon          -->
-          <button type="button" class="btn btn-warning" (click) = "enableEdit()">Enable Edit</button>
-          <form  class="needs-validation" (ngSubmit)="editDog(dog)"novalidate>
-            <div class="row g-3">
-              <div class="col-sm-6">
-                <label for="forename" class="form-label">Forename</label>
-                <input type="text" class="form-control" name="forename" id="forename" [(ngModel)]="dog.forename" placeholder="Forename" value="{{dog.forename}}" required>
-                <div class="invalid-feedback"> 
-                  Valid forename is required.
-                </div>
+<div *ngIf="dog" class="container">
+  <main>
+    <div class="row my-2">
+      <div class="col 4">
+        </div>
+        <div class="col 4">
+        </div>
+        <div class="col 4">
+          <div class="">
+            <button type="button" class="btn btn-warning btn-sm float-end" (click)="enableEdit()">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-lock-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"
+                />
+              </svg>
+              Enable Edit
+            </button>
+          </div>
+        </div>
+    </div>
+    <div class="">
 
-                <label for="surname" class="form-label">Surname</label>
-                <input type="text" class="form-control" name="surname" id="surname" [(ngModel)]="dog.surname" placeholder="Surname" value="{{dog.surname}}" required>
-                <div class="invalid-feedback">
-                  Valid surname is required.
-                </div>
-
-                <label for="breed" class="form-label">Breed</label>
-                <select class="form-select" name="breed" id="breed" [(ngModel)]="dog.breed" required>
-                  <option *ngFor="let breed of breeds" [value]="breed.id">{{breed.name}}
-                </select>
-                <div class="invalid-feedback">
-                  Please select a breed.
-                </div>
-
-                <label for="description" class="form-label">Description</label>
-                <input type="text" class="form-control" name="description" id="description" [(ngModel)]="dog.description" placeholder="description" value="{{dog.description}}" required>
-                <div class="invalid-feedback">
-                  Valid description is required.
-                </div>
-
-                <label for="dob" class="form-label">DOB</label>
-                <input type="date" class="form-control" name="dob" id="dob" [(ngModel)]="dog.dob" placeholder="dob" [(ngModel)]="dog.dob" (ngModelChange)="this.dog.dob=$event" value ={{dog.dob}}>
-                <div class="invalid-feedback">
-                  Valid dob is required.
-                </div>
-
-                <label for="startDate" class="form-label">Start Date</label>
-                <input type="date" class="form-control" name="startDate" id="startDate" [(ngModel)]="dog.startDate" (ngModelChange)="this.dog.startDate=$event" value="dog.startDate">
-                <div class="invalid-feedback">
-                  Valid startDate is required.
-                </div>
-
-                <label for="status" class="form-label">System Status</label>
-                <input type="number" class="form-control" name="status"  id="status" [(ngModel)]="dog.systemStatus" placeholder="System Status" value="{{dog.systemStatus}}" required>
-                <div class="invalid-feedback">
-                  Valid systemStatus is required.
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <p>add photo here</p>
+      <form class="needs-validation" (ngSubmit)="editDog(dog)" novalidate>
+        <div class="row g-3">
+          <div class="col-sm-8">
+            <div class="row mb-3">
+              <label for="forename" class="col-sm-3 col-form-label"
+                >Forename</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="forename"
+                  id="forename"
+                  [(ngModel)]="dog.forename"
+                  placeholder="Forename"
+                  value="{{ dog.forename }}"
+                  required
+                />
+                <div class="invalid-feedback">Valid forename is required.</div>
               </div>
             </div>
-            <input *ngIf="edit" type="submit" value="Confirm Edit" class="btn btn-secondary" (click) = "editDog(dog)">
-            <!-- <button *ngIf="edit" type="button" class="btn btn-secondary" (click) = "editDog(dog)">Confirm Edit</button> -->
-            <button *ngIf="edit"type="button" class="btn btn-primary" (click) = "enableEdit()">Cancel</button>
-            </form>
+
+            <div class="row mb-3">
+            <label for="surname" class="col-sm-3 col-form-label">Surname</label>
+            <div class="col-sm-8">
+            <input
+              type="text"
+              class="form-control"
+              name="surname"
+              id="surname"
+              [(ngModel)]="dog.surname"
+              placeholder="Surname"
+              value="{{ dog.surname }}"
+              required
+            />
+            <div class="invalid-feedback">Valid surname is required.</div>
+          </div>
         </div>
-    </main>
-  </div>
+
+        <div class="row mb-3">
+            <label for="breed" class="col-sm-3 col-form-label">Breed</label>
+            <div class="col-sm-8">
+            <select
+              class="form-select"
+              name="breed"
+              id="breed"
+              [(ngModel)]="dog.breed"
+              required
+            >
+              <option *ngFor="let breed of breeds" [value]="breed.id">
+                {{ breed.name }}
+              </option>
+            </select>
+
+            <div class="invalid-feedback">Please select a breed.</div>
+          </div>
+        </div>
+
+            <div class="row mb-3">
+            <label for="description" class="col-sm-3 col-form-label">Description</label>
+            <div class="col-sm-8">
+            <input
+              type="text"
+              class="form-control"
+              name="description"
+              id="description"
+              [(ngModel)]="dog.description"
+              placeholder="description"
+              value="{{ dog.description }}"
+              required
+            />
+            <div class="invalid-feedback">Valid description is required.</div>
+          </div>
+        </div>
+
+            <div class="row mb-3">
+            <label for="dob" class="col-sm-3 col-form-label">DOB</label>
+            <div class="col-sm-8">
+            <input
+              type="date"
+              class="form-control"
+              name="dob"
+              id="dob"
+              [(ngModel)]="dog.dob"
+              placeholder="dob"
+              [(ngModel)]="dog.dob"
+              (ngModelChange)="this.dog.dob = $event"
+              value="{{ dog.dob }}"
+            />
+            <div class="invalid-feedback">Valid dob is required.</div>
+          </div>
+        </div>
+            <div class="row mb-3">
+            <label for="startDate" class="col-sm-3 col-form-label">Start Date</label>
+            <div class="col-sm-8">
+            <input
+              type="date"
+              class="form-control"
+              name="startDate"
+              id="startDate"
+              [(ngModel)]="dog.startDate"
+              (ngModelChange)="this.dog.startDate = $event"
+              value="dog.startDate"
+            />
+            <div class="invalid-feedback">Valid startDate is required.</div>
+          </div>
+        </div>
+            <div class="row mb-3">
+            <label for="status" class="col-sm-3 col-form-label">System Status</label>
+            <div class="col-sm-8">
+            <input
+              type="number"
+              class="form-control"
+              name="status"
+              id="status"
+              [(ngModel)]="dog.systemStatus"
+              placeholder="System Status"
+              value="{{ dog.systemStatus }}"
+              required
+            />
+            <div class="invalid-feedback">Valid systemStatus is required.</div>
+          </div>
+        </div>
+
+          </div>
+          <div class="col-sm-4 border">
+            <p>add photo here</p>
+          </div>
+        </div>
+        <input
+          *ngIf="edit"
+          type="submit"
+          value="Confirm Edit"
+          class="btn btn-secondary"
+          (click)="editDog(dog)"
+        />
+        <!-- <button *ngIf="edit" type="button" class="btn btn-secondary" (click) = "editDog(dog)">Confirm Edit</button> -->
+        <button
+          *ngIf="edit"
+          type="button"
+          class="btn btn-primary"
+          (click)="enableEdit()"
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
+  </main>
+</div>

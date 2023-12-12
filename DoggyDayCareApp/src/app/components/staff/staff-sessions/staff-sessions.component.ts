@@ -14,10 +14,11 @@ import { StaffService } from 'app/services/staff.service';
 })
 export class StaffSessionsComponent {
   @Input() staff!: Staff;
-  startDate!: Date; 
-  endDate!: Date;
+  startDate: Date = new Date(new Date().getFullYear(), 0, 1); 
   formattedStartDate!: string;
+  endDate: Date = new Date(new Date().getFullYear(), 11, 31);
   formattedEndDate!: string;
+
   showDeleteOptions: boolean = false;
   delete: Boolean = false;
 
@@ -26,10 +27,13 @@ export class StaffSessionsComponent {
 
   constructor(private staffService: StaffService, private sessionService: SessionService, private route: ActivatedRoute, private datePipe:DatePipe){}
   
+  ngOnInit():void {
+    this.getformattedDate()
+    this.sessionService.getStaffSessionDetails(this.staff.id ?? 0, this.formattedStartDate, this.formattedEndDate).subscribe((sessions) => this.sessions = sessions);
+   }
+
   getformattedDate() {
-    // return this.datePipe.transform(this.startDate, 'dd-MM-yyyy');
     this.formattedStartDate = formatDate(this.startDate, 'yyyy-MM-dd hh:mm:ssZZZZZ', 'en_US')
-    // return this.datePipe.transform(this.endDate, 'dd-MM-yyyy');
     this.formattedEndDate = formatDate(this.endDate, 'yyyy-MM-dd hh:mm:ssZZZZZ', 'en_US')
   }
 

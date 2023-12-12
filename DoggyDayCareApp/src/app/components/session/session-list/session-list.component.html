@@ -1,98 +1,181 @@
-<div>
-<div *ngIf="session.id && showSelected">
-<app-session-details [session]="session" [possibleStaff]="possibleStaff" (showSelectedSession)="hideSession($event)"></app-session-details>
-</div>
+<div class="container">
+  <div *ngIf="session.id && showSelected">
+    <app-session-details
+      [session]="session"
+      [possibleStaff]="possibleStaff"
+      (showSelectedSession)="hideSession($event)"
+    ></app-session-details>
+  </div>
 
-<div class="row" *ngIf="!showSelected">
-    <h2>Session</h2>
+  <div  *ngIf="!showSelected" class="row my-2 align-middle">
+    <div class="col 4"></div>
+    <div class="col 4 border rounded-pill bg-white">
+      <h2 class="text-center align-middle">Session</h2>
+    </div>
+    <div class="col 4 align-middle"></div>
+  </div>
 
-<div class="col-7">
-<form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
-    <div class="row g-3">
-        <h3>Date Search</h3>
+  <div class="row border rounded bg-white p-2" *ngIf="!showSelected">
+    <div class="col-10">
+      <form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
+        <div class="row g-3">
+          <h3>Date Search</h3>
 
-<label for="startDate" class="form-label">Start Date</label>
-<input type="date" class="form-control"  name="startDate" [(ngModel)]="startDate" (ngModelChange)="this.startDate=$event">
-<div class="invalid-feedback">
-  Valid start date is required.
-</div>
-
-<label for="endDate" class="form-label">End Date</label>
-<input type="date" class="form-control"  name="endDate" [(ngModel)]="endDate" (ngModelChange)="this.endDate=$event">
-<div class="invalid-feedback">
-  Valid end date is required.
-</div>
-
-</div>
-<input type="submit" value="Search" class="btn btn-block">
-<input type="reset" value="Reset" class="btn btn-block">
-</form>
-</div>
-<div class="col-3">
-    <h3>Options</h3>
-
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a [title]="'Create Session'"
-            [routerLink]="['/create-session']">
-            Create Session
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="startDate" class="form-label">Start Date</label>
+              <input
+                type="date"
+                class="form-control"
+                name="startDate"
+                [(ngModel)]="startDate"
+                (ngModelChange)="this.startDate = $event"
+              />
+              <div class="invalid-feedback">Valid start date is required.</div>
+            </div>
+            <div class="col-sm-6">
+              <label for="endDate" class="form-label">End Date</label>
+              <input
+                type="date"
+                class="form-control"
+                name="endDate"
+                [(ngModel)]="endDate"
+                (ngModelChange)="this.endDate = $event"
+              />
+              <div class="invalid-feedback">Valid end date is required.</div>
+            </div>
+          </div>
+        </div>
+        <input type="submit" value="Search" class="btn btn-primary m-1" />
+        <input type="reset" value="Reset" class="btn btn-warning m-1" />
+      </form>
+    </div>
+    <div class="col-2">
+      <div class="dropdown me-2 float-end">
+        <button
+          class="btn btn-info dropdown-toggle float-end"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Options
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a
+              class="dropdown-item"
+              [title]="'Create Session'"
+              [routerLink]="['/create-session']"
+            >
+              Create Session
             </a>
-        </li>
-        <li class="nav-item">
-            <a [title]="'Bulk Create Session'"
-            [routerLink]="['/create-bulk-session']">
-            Bulk Create Session
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              [title]="'Bulk Create Session'"
+              [routerLink]="['/create-bulk-session']"
+            >
+              Bulk Create Session
             </a>
-        </li>
-        <li class="nav-item">
-            <a [title]="'Bulk Staff Link'"
-            [routerLink]="['/create-bulk-staff-link']">
-            Bulk Create Staff Links
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              [title]="'Bulk Staff Link'"
+              [routerLink]="['/create-bulk-staff-link']"
+            >
+              Bulk Create Staff Links
             </a>
-        </li>
-      </ul>
-</div>
-</div>
-<div class="row" *ngIf="!showSelected">
-<table class="table">
-    <thead class="thead-dark">
+          </li>
+          <li>
+            <a
+              *ngIf="!showDeleteOptions"
+              class="dropdown-item"
+              (click)="showDelete()"
+              >Show Delete</a
+            >
+          </li>
+          <li>
+            <a
+              *ngIf="showDeleteOptions"
+              class="dropdown-item"
+              (click)="showDelete()"
+              >Hide Delete</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row border rounded p-1 my-2 bg-white" *ngIf="!showSelected">
+    <table class="table table-hover">
+      <thead class="table-light">
         <tr>
-            <th scope="col">Id</th>
-            <th scope ="col">Session Name</th>
-            <th scope ="col">Session DateTime</th>
-            <th scope ="col">Session Type</th>
-            <th scope ="col">Session Length In Minutes</th>
-            <th scope ="col">Session Size</th>
-            <th scope ="col">Session Staff</th>
-            <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
-            
+          <th scope="col">Id</th>
+          <th scope="col">Session Name</th>
+          <th scope="col">Session DateTime</th>
+          <th scope="col">Session Type</th>
+          <th scope="col">Session Length In Minutes</th>
+          <th scope="col">Session Size</th>
+          <th scope="col">Session Staff</th>
+          <th scope="col" *ngIf="showDeleteOptions">Delete</th>
         </tr>
-    </thead>
+      </thead>
 
-    <tbody>
+      <tbody class="table-group-divider">
         <tr *ngFor="let session of sessions">
-            <td>{{session.id}}</td>
-            <td>{{session.sessionName}}</td>
-            <td>{{session.sessionDateTime| date:'dd/MM/yyyy HH:mm'}}</td>
-            <td>{{session.sessionType}}</td>
-            <td>{{session.sessionLengthInMinutes}}</td>
-            <td>{{session.sessionSize}}</td>
-            <td><span *ngFor="let staff of session.staffList; let last = last" >
-                        <small>
-                            {{ staff.forename }} {{ staff.surname }} 
-                        </small>
-                        <span *ngIf="!last">, </span>
-                    </span></td>
-                    <button (click) = "selectSession(session)">Select Session</button>
-                <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
-                <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteSession(session)">Confirm Delete</button>
-                <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>
-                
-            
+          <td class="align-middle">
+            <!-- <a href="#" (click)="selectSession(session)">{{ session.id }}</a> -->
+            <button
+              type="button"
+              class="btn small btn-link p-0"
+              (click)="selectSession(session)"
+            >
+              {{ session.id }}
+            </button>
+          </td>
+          <td class="align-middle">{{ session.sessionName }}</td>
+          <td class="align-middle">
+            {{ session.sessionDateTime | date : "dd/MM/yyyy HH:mm" }}
+          </td>
+          <td class="align-middle">{{ session.sessionType }}</td>
+          <td class="align-middle">{{ session.sessionLengthInMinutes }}</td>
+          <td class="align-middle">{{ session.sessionSize }}</td>
+          <td class="align-middle">
+            <span *ngFor="let staff of session.staffList; let last = last">
+              <small> {{ staff.forename }} {{ staff.surname }} </small>
+              <span *ngIf="!last">, </span>
+            </span>
+          </td>
+          <td *ngIf="showDeleteOptions">
+            <button
+              *ngIf="showDeleteOptions && !delete"
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteButton()"
+            >
+              Delete
+            </button>
+            <button
+              *ngIf="showDeleteOptions && delete"
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteSession(session)"
+            >
+              Confirm Delete
+            </button>
+            <button
+              *ngIf="showDeleteOptions && delete"
+              type="button"
+              class="btn btn-primary"
+              (click)="deleteButton()"
+            >
+              Cancel
+            </button>
+          </td>
         </tr>
-    </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
 </div>
-
-</div>
-

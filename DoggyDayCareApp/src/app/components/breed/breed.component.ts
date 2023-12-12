@@ -11,14 +11,26 @@ export class BreedComponent {
   // @Input() breed?: Breed;
   newBreedName = '';
   breeds: Breed[] = [];
+
+  showDeleteOptions: boolean = false;
+  showEditOptions: boolean = false;
   edit: boolean = false;
   delete: boolean = false;
   create: boolean = false;
 
 
+
+
   constructor(private breedService: BreedService){}
   ngOnInit():void {
   this.breedService.getBreeds().subscribe((breeds) => this.breeds = breeds);
+  }
+
+  showDelete(){
+    this.showDeleteOptions = !this.showDeleteOptions;
+  }
+  showEdit(){
+    this.showEditOptions = !this.showEditOptions;
   }
 
   editButton(){

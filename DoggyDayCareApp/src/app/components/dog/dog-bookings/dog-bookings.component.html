@@ -1,104 +1,187 @@
-<div class="row">
-    <h2>Dog Bookings</h2>
-    <div class="col order-2">
-        <h3>Options</h3>
-
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <button *ngIf="view != 'create'" type="button" class="btn btn-secondary" (click) = "showCreate()">Show Create</button>
-                <button *ngIf="view == 'create'" type="button" class="btn btn-primary" (click) = "showCreate()">Cancel Create</button>
-            </li>
-            <li class="nav-item">
-                <button type="button" class="btn btn-secondary" (click) = "showBulkCreate()">Show Bulk Create</button>
-            </li>
-
-          </ul>
-</div>
-
-<div *ngIf="view == 'bulkCreate'" class="col-4 order-1">
+<div class="container">
+<div class="row border rounded">
+  <div *ngIf="view == 'bulkCreate'" class="col-10">
     <app-dog-bulk-booking [currentDog]="currentDog"></app-dog-bulk-booking>
-</div>
-    <div *ngIf="view == 'create'" class="col-4 order-1">
-        <form class="add-form" (ngSubmit)="createBooking()" novalidate>
-            <label for="newBookingSession" class="form-label">Session</label>
-            <select class="form-select" name="newBookingSession" id="newBookingSession" [(ngModel)]="newBookingSession" required>
-              <option *ngFor="let session of avilableSessions" [ngValue]="session">{{session.sessionName}} {{session.sessionDateTime}}
-            </select>
-            <div class="invalid-feedback">
-              Please select a session.
+  </div>
+  <div *ngIf="view == 'create'" class="col-10">
+    <form class="add-form" (ngSubmit)="createBooking()" novalidate>
+      <label for="newBookingSession" class="form-label">Session</label>
+      <select
+        class="form-select"
+        name="newBookingSession"
+        id="newBookingSession"
+        [(ngModel)]="newBookingSession"
+        required
+      >
+        <option *ngFor="let session of avilableSessions" [ngValue]="session">
+          {{ session.sessionName }} {{ session.sessionDateTime }}
+        </option>
+      </select>
+
+      <div class="invalid-feedback">Please select a session.</div>
+      <input type="submit" value="Create Booking" class="btn btn-primary m-1" />
+      <input type="reset" value="Reset" class="btn btn-warning m-1" />
+    </form>
+  </div>
+
+  <div *ngIf="view == 'list'" class="col-10 rounded bg-white">
+    <form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
+      <div class="row g-3">
+        <div class="col-sm-10">
+          <h3>Date Search</h3>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="startDate" class="form-label">Start Date</label>
+              <input
+                type="date"
+                class="form-control"
+                name="startDate"
+                [(ngModel)]="startDate"
+                (ngModelChange)="this.startDate = $event"
+              />
+              <div class="invalid-feedback">Valid start date is required.</div>
             </div>
-            <input type="submit" value="Create Booking" class="btn btn-primary">
-            <input type="reset" value="Reset Record" class="btn btn-block">
-            
-        </form>
+            <div class="col-sm-6">
+              <label for="endDate" class="form-label">End Date</label>
+              <input
+                type="date"
+                class="form-control"
+                name="endDate"
+                [(ngModel)]="endDate"
+                (ngModelChange)="this.endDate = $event"
+              />
+              <div class="invalid-feedback">Valid end date is required.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="submit" value="Search" class="btn btn-primary m-1" />
+      <input type="reset" value="Reset" class="btn btn-warning m-1" />
+    </form>
+  </div>
+  <div class="col-2">
+    <div class="dropdown my-2 float-end">
+      <button
+        class="btn btn-info dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Options
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a
+            *ngIf="view != 'create'"
+            class="dropdown-item"
+            (click)="showCreate()"
+            >Show Create</a
+          >
+        </li>
+        <li>
+          <a
+            *ngIf="view == 'create'"
+            class="dropdown-item"
+            (click)="showCreate()"
+            >Hide Create</a
+          >
+        </li>
+        <li>
+          <a
+            *ngIf="view != 'create'"
+            class="dropdown-item"
+            (click)="showBulkCreate()"
+            >Show Bulk Create</a
+          >
+        </li>
+        <li>
+          <a
+            *ngIf="view == 'create'"
+            class="dropdown-item"
+            (click)="showBulkCreate()"
+            >Hide Bulk Create</a
+          >
+        </li>
+        <li>
+          <a
+            *ngIf="!showDeleteOptions"
+            class="dropdown-item"
+            (click)="showDelete()"
+            >Show Delete</a
+          >
+        </li>
+        <li>
+          <a
+            *ngIf="showDeleteOptions"
+            class="dropdown-item"
+            (click)="showDelete()"
+            >Hide Delete</a
+          >
+        </li>
+      </ul>
     </div>
-
-
-
-
-<div *ngIf="view == 'list'"  class="col order-1">
-<form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
-    <div class="row g-3">
-      <div class="col-sm-6">
-        <h3>Date Search</h3>
-
-<label for="startDate" class="form-label">Start Date</label>
-<input type="date" class="form-control"  name="startDate" [(ngModel)]="startDate" (ngModelChange)="this.startDate=$event">
-<div class="invalid-feedback">
-  Valid start date is required.
+  </div>
 </div>
+<div *ngIf="view == 'list'" class="row border rounded p-1 my-2">
+  <!-- <button type="button" class="btn btn-warning" (click) = "createButton()">Add new Contact</button> -->
+  <table class="table table-hover">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">ID</th>        
+        <th scope="col">Type</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date Time</th>
+        <th scope="col">Length In Minutes</th>
+        <th scope="col">Size</th>
+        <th scope="col">Staff</th>
+        <th scope="col" *ngIf="showDeleteOptions">Delete</th>
+      </tr>
+    </thead>
 
-<label for="endDate" class="form-label">End Date</label>
-<input type="date" class="form-control"  name="endDate" [(ngModel)]="endDate" (ngModelChange)="this.endDate=$event">
-<div class="invalid-feedback">
-  Valid end date is required.
+    <tbody class="table-group-divider">
+      <tr *ngFor="let session of sessions">
+        <td>{{ session.id }}</td>        
+        <td>{{ session.sessionType }}</td>
+        <td>{{ session.sessionName }}</td>
+        <td>{{ session.sessionDateTime | date : "dd/MM/yyyy HH:mm" }}</td>
+        <td>{{ session.sessionLengthInMinutes }}</td>
+        <td>{{ session.sessionSize }}</td>
+        <td>
+          <span *ngFor="let staff of session.staffList; let last = last">
+            <small> {{ staff.forename }} {{ staff.surname }} </small>
+            <span *ngIf="!last">, </span>
+          </span>
+        </td>
+        <td *ngIf="showDeleteOptions">
+          <!-- <button (click) = "selectSession(session)">Select Session</button>  -->
+          <button
+            *ngIf="showDeleteOptions && !delete"
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteButton()"
+          >
+            Delete
+          </button>
+          <button
+            *ngIf="showDeleteOptions && delete"
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteBooking(session)"
+          >
+            Confirm Delete
+          </button>
+          <button
+            *ngIf="showDeleteOptions && delete"
+            type="button"
+            class="btn btn-primary"
+            (click)="deleteButton()"
+          >
+            Cancel
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
-</div>
-</div>
-<input type="submit" value="Search" class="btn btn-block">
-<input type="reset" value="Reset" class="btn btn-block">
-</form>
-</div>
-</div>
-<div *ngIf="view == 'list'"  class="">
-    <!-- <button type="button" class="btn btn-warning" (click) = "createButton()">Add new Contact</button> -->
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope ="col">Session Name</th>
-                <th scope ="col">Session DateTime</th>
-                <th scope ="col">Session Type</th>
-                <th scope ="col">Session Length In Minutes</th>
-                <th scope ="col">Session Size</th>
-                <th scope ="col">Session Staff</th>
-                <button type="button" class="btn btn-danger" (click) = "showDelete()">Show Delete</button>
-                
-            </tr>
-        </thead>
-    
-        <tbody>
-            <tr *ngFor="let session of sessions">
-                <td>{{session.id}}</td>
-                <td>{{session.sessionName}}</td>
-                <td>{{session.sessionDateTime| date:'dd/MM/yyyy HH:mm'}}</td>
-                <td>{{session.sessionType}}</td>
-                <td>{{session.sessionLengthInMinutes}}</td>
-                <td>{{session.sessionSize}}</td>
-                <td><span *ngFor="let staff of session.staffList; let last = last" >
-                            <small>
-                                {{ staff.forename }} {{ staff.surname }} 
-                            </small>
-                            <span *ngIf="!last">, </span>
-                        </span></td>
-                        <!-- <button (click) = "selectSession(session)">Select Session</button>  -->
-                    <button *ngIf="showDeleteOptions && !delete"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
-                    <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-danger" (click) = "deleteBooking(session)">Confirm Delete</button>
-                    <button *ngIf="showDeleteOptions && delete"  type="button" class="btn btn-primary" (click) = "deleteButton()">Cancel</button>
-                    
-                
-            </tr>
-        </tbody>
-    </table>
 </div>

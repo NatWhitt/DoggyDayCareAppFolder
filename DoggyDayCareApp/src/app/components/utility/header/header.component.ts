@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+  import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UIService } from 'app/services/ui.service';
 import { Subscription } from 'rxjs';
+
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-header',

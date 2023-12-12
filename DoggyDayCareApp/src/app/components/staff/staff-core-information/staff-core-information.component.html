@@ -1,44 +1,86 @@
 <div *ngIf="staff"class="container">
     <main>
+      <div class="row my-2">
+        <div class="col 4">
+          </div>
+          <div class="col 4">
+          </div>
+          <div class="col 4">
+            <div class="">
+              <button type="button" class="btn btn-warning btn-sm float-end" (click)="enableEdit()">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-lock-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"
+                  />
+                </svg>
+                Enable Edit
+              </button>
+            </div>
+          </div>
+      </div>
         <div class="">
-          <h4 class="mb-3">Staff Record</h4>    
-          <!-- change to lock icon          -->
-          <button type="button" class="btn btn-warning" (click) = "enableEdit()">Enable Edit</button>
           <form  class="needs-validation" (ngSubmit)="editStaff(staff)"novalidate>
             <div class="row g-3">
-              <div class="col-sm-6">
+              <div class="col-sm-8">
 
-                <label for="title" class="form-label">Title</label>
+                <div class="row mb-3">
+                <label for="title" class="col-sm-3 col-form-label">Title</label>
+                <div class="col-sm-8">
                 <input type="text" class="form-control" name="title" id="title" [(ngModel)]="staff.title" placeholder="Title" value="{{staff.title}}" required>
                 <div class="invalid-feedback"> 
                   Valid title is required.
                 </div>
+              </div>
+              </div>
 
-                <label for="forename" class="form-label">Forename</label>
+              <div class="row mb-3">
+                <label for="forename" class="col-sm-3 col-form-label">Forename</label>
+                <div class="col-sm-8">
                 <input type="text" class="form-control" name="forename" id="forename" [(ngModel)]="staff.forename" placeholder="Forename" value="{{staff.forename}}" required>
                 <div class="invalid-feedback"> 
                   Valid forename is required.
                 </div>
+              </div>
+            </div>
 
-                <label for="surname" class="form-label">Surname</label>
+            <div class="row mb-3">
+                <label for="surname" class="col-sm-3 col-form-label">Surname</label>
+                <div class="col-sm-8">
                 <input type="text" class="form-control" name="surname" id="surname" [(ngModel)]="staff.surname" placeholder="Surname" value="{{staff.surname}}" required>
                 <div class="invalid-feedback">
                   Valid surname is required.
                 </div>
+              </div>
+            </div>
 
-                <label for="startDate" class="form-label">Start Date</label>
+                <div class="row mb-3">
+                <label for="startDate" class="col-sm-3 col-form-label">Start Date</label>
+                <div class="col-sm-8">
                 <input type="date" class="form-control" name="startDate" id="startDate" [(ngModel)]="staff.startDate" (ngModelChange)="this.staff.startDate=$event" value="dog.startDate">
                 <div class="invalid-feedback">
                   Valid start Date is required.
                 </div>
+              </div>
+            </div>
 
-                <label for="status" class="form-label">System Status</label>
+                <div class="row mb-3">
+                <label for="status" class="col-sm-3 col-form-label">System Status</label>
+                <div class="col-sm-8">
                 <input type="number" class="form-control" name="status"  id="status" [(ngModel)]="staff.systemStatus" placeholder="System Status" value="{{staff.systemStatus}}" required>
                 <div class="invalid-feedback">
                   Valid system Status is required.
                 </div>
               </div>
-              <div class="col-sm-6">
+            </div>
+          </div>
+          <div class="col-sm-4 border">
                 <p>add photo here</p>
               </div>
             </div>

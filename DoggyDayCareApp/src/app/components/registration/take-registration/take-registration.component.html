@@ -1,74 +1,88 @@
-<div m-2>
+<div class="container">
   <h2 class="text-center">Take A Register</h2>
-  <div class="row" *ngIf="!showSessions && showSelected">
-    <div>
-      <button type="button" class="btn btn-info" (click)="sessionControl()">
-        Show Session Selection
-      </button>
-    </div>
-  </div>
 
-  <div class="row m-2 border" *ngIf="showSessions">
-    <div class="row" *ngIf="showSessions && showSelected">
+  <div class="row m-2 p-2 border rounded bg-white" *ngIf="showSessions || bookingReg.length ==0">
+    <div class="row">
+      <div class="col-2">
+    <div *ngIf="showSessions && showSelected">
       <div>
         <button type="button" class="btn btn-info" (click)="sessionControl()">
-          Hide Session Selection
+          Hide Selector
         </button>
       </div>
     </div>
+    </div>
+    <div class="col">
+    <h3 class="text-center">Session Selector</h3>
+  </div>
+    <div class="col-2"></div>
+    </div>
 
     <div class="col">
-      <form class="needs-validation" (ngSubmit)="getSessions()" novalidate>
+      <form (ngSubmit)="selectRegistrationSession()">
         <div class="row g-3">
-          <h3 class="text-center">Date Selection</h3>
           <div class="col">
+            <label for ="date" class="form-label">Date</label>
+
             <input
               type="Date"
               class="form-control"
               name="date"
               [(ngModel)]="date"
-              (ngModelChange)="this.date = $event"
+              (ngModelChange)="getformattedDate($event)"
             />
-          </div>
-          <div class="col">
-            <input type="submit" value="Select" class="btn btn-block" />
-          </div>
-          <div class="invalid-feedback">Valid date is required.</div>
+
         </div>
-      </form>
-    </div>
-    <div  class="row" >
-      <div class="col-6 border m-2">
-        <h3 >Select a session:</h3>
-        <ul class="list-group mb-2">
-          <tr *ngFor="let session of sessions">
-            <li class="list-group-item d-flex justify-content-between align-items-start" (click)="selectRegistrationSession(session)">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">{{ session.sessionName }}</div>
-                  {{ session.sessionDateTime | date : "dd/MM/yyyy HH:mm" }}
-                </div>
-                <!-- <span class="badge bg-primary rounded-pill">Number of dogs - need to do this</span> -->
-              </li>
-          </tr>
-        </ul>
+        <div class="mt-2" *ngIf="sessions?.length" >
+          <label for ="date" class="form-label">Session</label>
+        <select name="session" id="session"  [(ngModel)]="sessionid" class="form-select">
+          <option *ngFor="let session of sessions" value="{{ session.id }}">{{ session.sessionName }} {{ session.sessionDateTime | date : "dd/MM/yyyy HH:mm" }}</option>
+        </select>
       </div>
+      <div class="mb-2">
+      <button class="btn btn-primary" type="submit" >Select</button>
     </div>
+      </div>
+      </form>
   </div>
 </div>
-<div class="row border" *ngIf="showSelected">
-  <div *ngIf="session" class="container">
-    <h3 class="text-center">{{ session.sessionName }}</h3>
-    <h4 class="text-center">{{ session.sessionDateTime | date:'dd/MM/yyyy HH:mm' }}</h4>
-    <table class="table">
-      <thead class="thead-dark">
-        <th>Dog Name</th>
-        <th>Status</th>
-        <th>Note</th>
+
+<div class="row border rounded bg-white m-2 p-2" *ngIf="showSelected">
+  <div class="row">
+    <div *ngIf="bookingReg.length >0" class="col-2">
+    <div *ngIf="!showSessions && showSelected">
+      <button type="button" class="btn btn-info" (click)="sessionControl()">
+        Show Selector
+      </button>
+    </div>
+  </div>
+  <div *ngIf="bookingReg.length >0" class="col">
+    <h3 class="text-center">{{session.sessionName }}</h3>
+    <h4 class="text-center">{{session.sessionDateTime | date:'dd/MM/yyyy HH:mm' }}</h4>
+  </div>
+  <div *ngIf="bookingReg.length ==0" class="col">
+    <h3 class="text-center">No Registration Found Please Try again</h3>
+  </div>
+  <div *ngIf="bookingReg.length >0" class="col-2">
+    <button type="button" class="btn btn-info" (click)="remainingAsPresent()">
+      Mark Present
+    </button>
+  </div>
+  </div>
+
+
+    <div *ngIf="bookingReg.length >0" class="row">
+    <table class="table table-bordered m-2 align-middle">
+      <thead class="table-light">
+        <th class="col-3">Dog Name</th>
+        <th class="col-2">Status</th>
+        <th class="col-7">Note</th>
       </thead>
 
       <tbody>
         <tr *ngFor="let booking of bookingReg">
-          <td>{{ booking.dog.forename }} {{ booking.dog.surname }}</td>
+          <td class="col-3">{{ booking.dog.forename }} {{ booking.dog.surname }}</td>
+          <td class="col-2">
           <select
             class="form-select"
             name="registrationstatus"
@@ -80,18 +94,25 @@
               {{ status }}
             </option>
           </select>
-          <td>
-            <input
+        </td>
+          <td class="col-7">
+            <div class="input-group">
+              <textarea class="form-control"
               type="text"
               name="note"
               id="text"
               [(ngModel)]="booking.registrationDetails.note"
               value="{{ booking.registrationDetails.note }}"
-              placeholder="Note"
-            />
+              placeholder="Note">
+            </textarea>
+          </div>
           </td>
         </tr>
       </tbody>
+    </table>
+  </div>
+    <div *ngIf="bookingReg.length >0"  class="row">
+      <div>
       <button
         type="button"
         class="btn btn-success"
@@ -99,6 +120,7 @@
       >
         Update Registrations
       </button>
-    </table>
+    </div>
   </div>
-</div>
+  </div>
+

@@ -1,22 +1,56 @@
-<h1>Test</h1>
-<div class="col-4">
-    <div >
-    <form class="add-form" [hidden]="!create" (ngSubmit)="createBreed()">
+<div class="container">
+    <div class="row mt-2 align-middle">
+    <div class="col 4"></div> 
+    <div class="col 4 border rounded-pill bg-white" >
+        <h2 class="text-center align-middle">Breed List</h2>
+    </div>
+    <div class="col 4 align-middle">
+      <div class="dropdown me-2 align-middle">
+      <button class="btn btn-info dropdown-toggle float-end" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Options
+      </button>
+      <ul class="dropdown-menu">
+        <li ><a *ngIf="!showDeleteOptions" class="dropdown-item" (click)="showDelete()">Show Delete </a></li>
+        <li ><a *ngIf="showDeleteOptions" class="dropdown-item" (click)="showDelete()">Hide Delete </a></li>
+        <li><a class="dropdown-item" [title]="'Create Breed'" (click) = "createButton()">Create Breed</a></li>
+        <li>
+            <a
+              *ngIf="!showEditOptions"
+              class="dropdown-item"
+              (click)="showEdit()"
+              >Show Edit</a
+            >
+          </li>
+          <li>
+            <a
+              *ngIf="showEditOptions"
+              class="dropdown-item"
+              (click)="showEdit()"
+              >Hide Edit</a
+            >
+          </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div *ngIf="create" class="row m-2 p-2 border rounded bg-white">
+    <form class="add-form" (ngSubmit)="createBreed()">
         <div  class="form-control">
-            <label for="text">Breed</label>
-            <input type="text" name="text" [(ngModel)]="newBreedName" id="text" placeholder="Breed Name">
+            <label for="text" class="form-label">Breed</label>
+            <input type="text" name="text" class="form-control" [(ngModel)]="newBreedName" id="text" placeholder="Breed Name">
         </div>
-        <input type="submit" value="Create Breed" class="btn btn-primary">
-        <button type="button" class="btn btn-primary" (click) = "createButton()">Cancel Create</button>
+        <input type="submit" value="Create Breed" class="btn btn-primary m-1">
+        <button type="button" class="btn btn-warning m-1" (click) = "createButton()">Cancel Create</button>
     </form>
 </div>
-<table class="table">
-    <thead class="thead-dark">
+
+<div class="row m-2 p-2 border rounded bg-white">
+<table class="table table-bordered align-middle">
+  <thead class="thead-light">
         <tr>
             <th scope="col">Id</th>
             <th scope ="col">Breed</th>
-            <th scope="col2">Options 
-                <button *ngIf="!create" type="button" class="btn btn-primary" (click) = "createButton()">Create</button> 
+            <th scope="col">Options 
             </th>
         </tr>
     </thead>
@@ -28,13 +62,14 @@
             <td *ngIf="edit">
                 <input type="text" name="name"id="text" [(ngModel)]="breed.name" value="{{breed.name}}" placeholder="name"></td>
             <td>
-                <button *ngIf="!edit && !delete" type="button" class="btn btn-secondary " (click) = "editButton()">Edit</button>
+                <button *ngIf="!edit && showEditOptions" type="button" class="btn btn-secondary " (click) = "editButton()">Edit</button>
                 <button *ngIf="edit" type="button" class="btn btn-secondary" (click) = "editBreed(breed)">Confirm Edit</button>
-                <button *ngIf="!delete && !edit"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
+                <button *ngIf="!delete && showDeleteOptions"   type="button" class="btn btn-danger" (click) = "deleteButton()">Delete</button>
                 <button *ngIf="delete"  type="button" class="btn btn-danger" (click) = "deleteBreed(breed)">Confirm Delete</button>
-                <button *ngIf="edit|| delete"type="button" class="btn btn-primary" (click) = "cancel()">Cancel</button>
+                <button *ngIf="edit || delete"type="button" class="btn btn-primary" (click) = "cancel()">Cancel</button>
             </td>
         </tr>
     </tbody>
 </table>
+</div>
 </div>
