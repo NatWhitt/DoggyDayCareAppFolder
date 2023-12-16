@@ -1,6 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Dog } from 'app/models/dog';
+import { DogPhoto } from 'app/models/dog-photo';
+import { UploadDogPhoto } from 'app/models/upload-dog-photo';
 import { environment } from 'environments/environment';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 
@@ -57,6 +59,7 @@ export class DogService {
             data = (responseData as any)[key];
           }
         }
+        
         return data;
       }
     } 
@@ -87,6 +90,47 @@ export class DogService {
   deleteDog(dog: Dog) : Observable<Dog>{
     return this.http.delete<Dog>(`${environment.apiUrl}/${this.controller}/${dog.id}`,httpOptions)
   }
+  getDogPhoto(id: number) : Observable<DogPhoto>{
+    return this.http.get<DogPhoto>(`${environment.apiUrl}/${this.controller}/Photo/${id}`)
+    .pipe(map((responseData:any)=>{
+      let data: any;
+      for(const key in responseData){
+        if(responseData.hasOwnProperty(key)){
+          if(key === "data"){
+            data = (responseData as any)[key];
+            
+          }
+        }
+        return data;
 
+        
+      }
+    } 
+    ),
+    catchError(this.handleError)
+    );
+  }
 
+  // file upload swapping to uploading data with dog ID
+  // uploadDogPhoto(file: File): Observable<HttpEvent<any>> {
+  //   const formData: FormData = new FormData();
+
+  //   formData.append('file', file);
+
+  //   const req = new HttpRequest('POST', `${environment.apiUrl}/${this.controller}/Photo`, formData, {
+  //     reportProgress: true,
+  //     responseType: 'json',
+  //   });
+
+  //   return this.http.request(req);
+  // }
+  uploadDogPhoto(newPhoto : UploadDogPhoto): Observable<UploadDogPhoto>{
+    return this.http.post<UploadDogPhoto>(`${environment.apiUrl}/${this.controller}/Photo`,newPhoto, httpOptions).pipe(
+      catchError((error) => {
+        console.error('API Error:', error);
+        return throwError(error);
+      })
+    );
+  }
+  
 }
