@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
@@ -35,7 +35,11 @@ import { DogBulkBookingComponent } from './components/dog/dog-bulk-booking/dog-b
 import { SessionRegistrationComponent } from './components/session/session-registration/session-registration.component';
 import { DogRegistrationComponent } from './components/dog/dog-registration/dog-registration.component';
 import { TakeRegistrationComponent } from './components/registration/take-registration/take-registration.component';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthService } from './auth/auth.service';
+import { StaffAccountComponent } from './components/staff/staff-account/staff-account.component';
+import { LoginComponent } from './components/account/login/login.component';
+import { RegisterComponent } from './components/account/register/register.component';
 
 
 @NgModule({
@@ -67,7 +71,10 @@ import { TakeRegistrationComponent } from './components/registration/take-regist
     DogBulkBookingComponent,
     SessionRegistrationComponent,
     DogRegistrationComponent,
-    TakeRegistrationComponent
+    TakeRegistrationComponent,
+    StaffAccountComponent,
+    LoginComponent,
+    RegisterComponent
     
   ],
   imports: [
@@ -76,9 +83,14 @@ import { TakeRegistrationComponent } from './components/registration/take-regist
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,    
+    ReactiveFormsModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,     {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

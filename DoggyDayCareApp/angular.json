@@ -101,6 +101,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/doggy-day-care-app",
+            "netlifyToken": "nfp_KobB9nB6VL1a98tVQJA5iv3dBtApGGpR3c36",
+            "siteId": "9fbd05f3-cb12-4a2e-a5b9-9dd5d518cdec"
+          }
         }
       }
     }

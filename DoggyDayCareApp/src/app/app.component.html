@@ -1,8 +1,11 @@
 <div class="row bg-body border">
-  <app-header></app-header>
+  <app-header [loggedInUser] = "user" (loggedOutUser) ="LogOut($event)"></app-header>
 </div>
 <div class="container bg-body-tertiary text-body">
-  <div class="row">
+  <div *ngIf="!loggedin">
+    <app-login (loggedInUser) ="logIn($event)"></app-login>
+  </div>
+  <div *ngIf="loggedin" class="row">
     <!-- <div class="col-2" [ngStyle]="{'background-image':'url(https://pixabay.com/get/g847ec28f230c6df5dcb80452f40d8ca4a97b890069a8c60f717115c8fefc79788970729447bf592acedebb951aea9b2c9b5314f3f6b1b44308e8d79a35997d2f066a53fee4f0645f61ffd5a7b4f34a9c_640.jpg)', display: 'block'}"> -->
       <!-- <div class="col-2 bg-success-subtle min-vh-100 border border-top-0 " >
       <app-menu-bar></app-menu-bar>

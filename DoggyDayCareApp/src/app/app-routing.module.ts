@@ -12,9 +12,13 @@ import { CreateSessionComponent } from './components/session/create-session/crea
 import { CreateBulkSessionsComponent } from './components/session/create-bulk-sessions/create-bulk-sessions.component';
 import { CreateBulkStaffLinkComponent } from './components/session/create-bulk-staff-link/create-bulk-staff-link.component';
 import { TakeRegistrationComponent } from './components/registration/take-registration/take-registration.component';
+import { LoginComponent } from './components/account/login/login.component';
+import { RegisterComponent } from './components/account/register/register.component';
 
 const routes: Routes = [
   {path: '', component: TakeRegistrationComponent},
+  {path: 'account-login', component: LoginComponent},
+  {path: 'account-register', component: RegisterComponent},
   {path: 'breeds', component: BreedComponent},
   {path: 'dog-list', component: DogComponent},
   {path: 'dog-profile/:id', component:DogProfileComponent},

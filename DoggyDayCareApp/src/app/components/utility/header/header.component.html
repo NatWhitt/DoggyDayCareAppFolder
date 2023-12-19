@@ -79,6 +79,19 @@
             Take A Register</a
           >
         </li>
+        <li *ngIf="loggedInUser" class="nav-item">
+          <a
+            class="nav-link link-body-emphasis fs-5"
+            [title]="'Log Out'"
+            [routerLink]="['#']"
+            (click)="logOut()"
+          >
+          <img     width="20"
+          height="20" src="assets/images/clipboard.svg">
+            Log out {{loggedInUser.username}}                    
+            </a
+          >
+        </li>
       </ul>
       
     </header>

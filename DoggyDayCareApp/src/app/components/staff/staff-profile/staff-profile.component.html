@@ -50,6 +50,13 @@
             >Sessions</a
           >
         </li>
+        <li class="nav-item">
+          <a
+            [ngClass]="view == 'account' ? 'nav-link active' : 'nav-link'"
+            (click)="setView('account')"
+            >Sessions</a
+          >
+        </li>
       </ul>
       <div class="row py-2 border rounded bg-white">
       <div *ngIf="view == 'core'">
@@ -59,6 +66,9 @@
       </div>
       <div *ngIf="view == 'session'">
         <app-staff-sessions [staff]="staff"></app-staff-sessions>
+      </div>
+      <div *ngIf="view == 'account'">
+        <app-staff-account ></app-staff-account>
       </div>
     </div>
     </main>
