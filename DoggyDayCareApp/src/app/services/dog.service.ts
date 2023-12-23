@@ -11,6 +11,7 @@ const httpOptions = {
     'Content-Type': 'application/json'
   })
 }
+
 @Injectable({
   providedIn: 'root'
 })
@@ -111,25 +112,11 @@ export class DogService {
     );
   }
 
-  // file upload swapping to uploading data with dog ID
-  // uploadDogPhoto(file: File): Observable<HttpEvent<any>> {
-  //   const formData: FormData = new FormData();
 
-  //   formData.append('file', file);
-
-  //   const req = new HttpRequest('POST', `${environment.apiUrl}/${this.controller}/Photo`, formData, {
-  //     reportProgress: true,
-  //     responseType: 'json',
-  //   });
-
-  //   return this.http.request(req);
-  // }
   uploadDogPhoto(newPhoto : UploadDogPhoto): Observable<UploadDogPhoto>{
+
     return this.http.post<UploadDogPhoto>(`${environment.apiUrl}/${this.controller}/Photo`,newPhoto, httpOptions).pipe(
-      catchError((error) => {
-        console.error('API Error:', error);
-        return throwError(error);
-      })
+      catchError(this.handleError)
     );
   }
   
