@@ -1,0 +1,98 @@
+<div class="card">
+  <div  class="card-header">
+    <div class="row">
+      <div class="col 3">
+        <div *ngIf="display != 'Session'">
+          <a
+            class="btn btn-primary btn-sm"
+            (click)="showList()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-left"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+              ></path>
+            </svg>
+            Back to Session List</a
+          >
+        </div>
+      </div>
+      <div *ngIf="display=='Session'"class="col-6 border rounded-pill bg-white">
+        <h2 class="text-center">Today's Sessions</h2>
+      </div>
+      <div *ngIf="display!='Session' && selectedSession" class="col-6 border rounded-pill bg-white">
+        <h2 class="text-center">    <h3 class="text-center">{{selectedSession.sessionName }}</h3>
+          <h4 class="text-center">{{selectedSession.sessionDateTime | date:'dd/MM/yyyy HH:mm' }}</h4></h2>
+      </div>
+      <div class="col 3"></div>
+    </div>
+  </div>
+  <div *ngIf="display=='Session'" class="card-body">
+    <div class="container">
+      <div class="row p-1 my-2">
+        <table class="table table-hover">
+          <thead class="table-ligh">
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Session Name</th>
+              <th scope="col">Session Type</th>
+              <th scope="col">Session Start</th>
+              <th scope="col">Session Duration</th>
+              <th scope="col">Session Size</th>
+              <th scope="col">Session Staff</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody class="table-group-divider">
+            <tr *ngFor="let session of sessions">
+              <td>{{ session.id }}</td>
+              <td>{{ session.sessionName }}</td>
+              <td>{{ session.sessionType }}</td>
+              <td>{{ session.sessionDateTime | date : "HH:mm" }}</td>
+              <td>{{ session.sessionLengthInMinutes }}</td>
+              <td>{{ session.sessionSize }}</td>
+              <td>
+                <span *ngFor="let staff of session.staffList; let last = last">
+                  <small> {{ staff.forename }} {{ staff.surname }} </small>
+                  <span *ngIf="!last">, </span>
+                </span>
+              </td>
+
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="showBookings(session)"
+                >
+                  Bookings
+                </button>
+                <button
+                type="button"
+                class="btn btn-secondary ms-1"
+                (click)="showRegistrations(session)"
+              >
+                Registration
+              </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<div class="row" *ngIf="selectedSession && display == 'Booking'">
+  <app-home-bookings [inSession]="selectedSession"></app-home-bookings>
+</div>
+<div class="row" *ngIf="selectedSession && display == 'Registration'">
+  <app-home-registration [inSession]="selectedSession"></app-home-registration>
+</div>
+

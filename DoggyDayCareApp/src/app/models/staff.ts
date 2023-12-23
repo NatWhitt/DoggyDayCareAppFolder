@@ -3,6 +3,8 @@ export interface Staff {
     title:string;
     forename:string;
     surname:string;
-    startDate:Date;
+    startDate?:Date;
     systemStatus:number;
+    email:string;
+    phoneNumber:string;
 }

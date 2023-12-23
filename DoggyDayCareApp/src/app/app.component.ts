@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from './auth/user';
+import { StaffService } from './services/staff.service';
+import { Staff } from './models/staff';
+import { first } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,19 +11,24 @@ import { User } from './auth/user';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'DoggyDayCareApp';
-  user: User | undefined;
+  @Output() outloggedInUser: EventEmitter<Staff> = new EventEmitter();
+  title: string = 'Doggy Day Care';
+  loggedInUser!: Staff
   loggedin :boolean = false;
 
-  @Output() outLoggedInUser: EventEmitter<User> = new EventEmitter();
-  logIn(loggedInUser: any) {
-    this.user = loggedInUser;
-    this.outLoggedInUser.emit(this.user);
-    this.loggedin = true;
+  constructor(private staffServices: StaffService, public router: Router){}
+
+  
+
+  logIn(loggedInUserEmail: any) {
+    this.loggedin = true; 
+    this.staffServices.getStaffByEmail(loggedInUserEmail).pipe(first()).subscribe({
+      next: (staff : Staff) => this.loggedInUser = staff,
+    error: () => {this.loggedInUser = {title: '', forename: 'Unkown', surname: 'User', email:'', systemStatus: 1, phoneNumber:'' } },
+  });
   }
 
   LogOut(loggedOutUser: any) {
-    this.user = loggedOutUser;
     this.loggedin = false;
   }
 }

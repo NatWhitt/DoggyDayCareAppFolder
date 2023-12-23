@@ -1,0 +1,62 @@
+<div class="card-body">
+  <div class="container">
+    <div class="row p-1 my-2">
+      <table class="table table-hover">
+        <thead class="table-light">
+            <th class="col-3">Dog Name</th>
+            <th class="col-2">Status</th>
+            <th class="col-7">Note</th>
+        </thead>
+
+        <tbody class="table-group-divider">
+          <tr *ngFor="let booking of bookingReg">
+            <td class="col-3">
+              {{ booking.dog.forename }} {{ booking.dog.surname }}
+            </td>
+            <td class="col-2">
+              <select
+                class="form-select"
+                name="registrationstatus"
+                id="pregistrationstatusresent"
+                [(ngModel)]="booking.registrationDetails.registrationStatus"
+                required
+              >
+                <option *ngFor="let status of statuses" [value]="status">
+                  {{ status }}
+                </option>
+              </select>
+            </td>
+            <td class="col-7">
+              <div class="input-group">
+                <textarea
+                  class="form-control"
+                  type="text"
+                  name="note"
+                  id="text"
+                  [(ngModel)]="booking.registrationDetails.note"
+                  value="{{ booking.registrationDetails.note }}"
+                  placeholder="Note"
+                >
+                </textarea>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="bookingReg.length > 0" class="row">
+        <div>
+            <button type="button" class="btn btn-info" (click)="remainingAsPresent()">
+                Set Remaining as Present
+              </button>
+          <button
+            type="button"
+            class="btn btn-success ms-1"
+            (click)="saveRegistration()"
+          >
+            Update Registrations
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

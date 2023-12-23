@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { NgOptimizedImage } from '@angular/common';
 import { User } from 'app/auth/user';
 import { AccountService } from 'app/auth/account.service';
+import { Staff } from 'app/models/staff';
 
 @Component({
   selector: 'app-header',
@@ -14,12 +15,16 @@ import { AccountService } from 'app/auth/account.service';
 })
 export class HeaderComponent {
   title: string = 'Doggy Day Care';
-  @Input() loggedInUser: User | undefined;
-  @Output() loggedOutUser: EventEmitter<User> = new EventEmitter<User>();
+  @Input() inloggedInUser: Staff | undefined;
+  
+  loggedInStatus :boolean;
 
   ngOnInit(): void {}
 
-  constructor(private uiService: UIService, private router: Router, private accountService: AccountService) {}
+  constructor(private router: Router, private accountService: AccountService) {
+    this.loggedInStatus = true;
+    
+  }
 
   hasRoute(route: string) {
     return this.router.url == route;
@@ -27,9 +32,9 @@ export class HeaderComponent {
 
   logOut(){
     console.log('Logged out');
-    this.loggedInUser={};
-    this.loggedOutUser.emit(this.loggedInUser)
+    this.loggedInStatus = false;
     localStorage.removeItem('user');
     this.accountService.logOut();
+
   }
 }

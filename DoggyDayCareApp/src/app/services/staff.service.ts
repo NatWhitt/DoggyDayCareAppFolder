@@ -69,6 +69,24 @@ export class StaffService {
     );
   }
 
+  getStaffByEmail(email: string) : Observable<Staff>{
+    return this.http.get<Staff>(`${environment.apiUrl}/${this.controller}/ByEmail/${email}`)
+    .pipe(map((responseData:any)=>{
+      let data: any;
+      for(const key in responseData){
+        if(responseData.hasOwnProperty(key)){
+          if(key === "data"){
+            data = (responseData as any)[key];
+          }
+        }
+        return data;
+      }
+    } 
+    ),
+    catchError(this.handleError)
+    );
+  }
+
   updateStaff(staff: Staff) : Observable<Staff>{
     return this.http.put<Staff>(`${environment.apiUrl}/${this.controller}`, staff)
     .pipe(map((responseData:any)=>{

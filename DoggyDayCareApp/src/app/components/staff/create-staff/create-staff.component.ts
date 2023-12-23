@@ -14,6 +14,11 @@ export class CreateStaffComponent {
   surname : string;
   startDate: Date;
   systemStatus:number;
+  email : string
+  phoneNumber : string;
+
+
+
   showAddDog: boolean = false;
 
 
@@ -23,6 +28,8 @@ export class CreateStaffComponent {
     this.surname = '';
     this.startDate = new Date();
     this.systemStatus =1;
+    this.email = '';
+    this.phoneNumber ='';
 
 }
 get formattedDate() {
@@ -40,6 +47,8 @@ onSubmit(){
     surname: this.surname,     
     startDate: this.startDate,
     systemStatus: this.systemStatus,
+    email: this.email,
+    phoneNumber: this.phoneNumber
   }
 
   this.staffService.createStaff(newStaff).subscribe();
@@ -49,6 +58,8 @@ onSubmit(){
   this.surname = '';
   this.startDate = new Date();
   this.systemStatus =1;
+  this.phoneNumber ='';
+  this.email ='';
 
 }
 }

@@ -40,6 +40,10 @@ import { AuthService } from './auth/auth.service';
 import { StaffAccountComponent } from './components/staff/staff-account/staff-account.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
+import { HomeComponent } from './components/home/home/home.component';
+import { HomeBookingsComponent } from './components/home/home-bookings/home-bookings.component';
+import { HomeRegistrationComponent } from './components/home/home-registration/home-registration.component';
+import { HomeSessionsComponent } from './components/home/home-sessions/home-sessions.component';
 
 
 @NgModule({
@@ -74,7 +78,11 @@ import { RegisterComponent } from './components/account/register/register.compon
     TakeRegistrationComponent,
     StaffAccountComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent,
+    HomeBookingsComponent,
+    HomeRegistrationComponent,
+    HomeSessionsComponent
     
   ],
   imports: [

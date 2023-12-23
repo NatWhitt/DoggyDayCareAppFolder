@@ -37,9 +37,7 @@ export class DogRegistrationComponent {
      this.registrationService.getPossibleDogRegistrations(this.currentDog.id ?? 0, this.formattedStartDate, this.formattedEndDate).subscribe((bookingReg) => this.bookingReg = bookingReg)
    }
    getformattedDate() {
-    // return this.datePipe.transform(this.startDate, 'dd-MM-yyyy');
     this.formattedStartDate = formatDate(this.startDate, 'yyyy-MM-dd hh:mm:ssZZZZZ', 'en_US')
-    // return this.datePipe.transform(this.endDate, 'dd-MM-yyyy');
     this.formattedEndDate = formatDate(this.endDate, 'yyyy-MM-dd hh:mm:ssZZZZZ', 'en_US')
   }
 

@@ -17,7 +17,6 @@ export class AuthService implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('interception test');
 
     // add auth header with jwt if user is logged in and request is to the api url
     const token = this.accountService.userValue;

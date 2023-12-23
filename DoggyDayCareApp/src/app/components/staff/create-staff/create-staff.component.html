@@ -29,66 +29,121 @@
     </div>
     <div class="col 4 align-middle"></div>
   </div>
-    <main>
-        <div class="">
+  <main>
+    <div class="">
+      <form class="needs-validation" (ngSubmit)="onSubmit()" novalidate>
+        <div class="row border rounded bg-white py-2 mb-2">
+          <div class="col">
+            <div class="form-group mb-1">
+              <label for="title" class="form-label">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                name="title"
+                id="title"
+                [(ngModel)]="title"
+                placeholder="Title"
+                required
+              />
+              <div class="invalid-feedback">Valid forename is required.</div>
+            </div>
 
-          <form class="needs-validation" (ngSubmit)="onSubmit()" novalidate>
-            <div class="row border rounded bg-white py-2 mb-2">
-              <div class="col">
+            <div class="form-group mb-1">
+              <label for="forename" class="form-label">Forename</label>
+              <input
+                type="text"
+                class="form-control"
+                name="forename"
+                id="forename"
+                [(ngModel)]="forename"
+                placeholder="Forename"
+                required
+              />
+              <div class="invalid-feedback">Valid forename is required.</div>
+            </div>
 
-                <div class="form-group mb-1">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" id="title" [(ngModel)]="title" placeholder="Title" required>
-                <div class="invalid-feedback">
-                  Valid forename is required.
-                </div>
-              </div>
-
-                <div class="form-group mb-1">
-                <label for="forename" class="form-label">Forename</label>
-                <input type="text" class="form-control" name="forename" id="forename" [(ngModel)]="forename" placeholder="Forename" required>
-                <div class="invalid-feedback">
-                  Valid forename is required.
-                </div>
-              </div>
-
-                <div class="form-group mb-1"></div>
-                <label for="surname" class="form-label">Surname</label>
-                <input type="text" class="form-control" name="surname" id="surname" [(ngModel)]="surname" placeholder="Surname"  required>
-                <div class="invalid-feedback">
-                  Valid surname is required.
-                </div>
-              </div>
-
-                <div class="form-group mb-1">
-                <label for="startDate" class="form-label">Start Date</label>
-                <input type="date" class="form-control"  name="startDate" [(ngModel)]="startDate" (ngModelChange)="this.startDate=$event">
-                <div class="invalid-feedback">
-                  Valid startDate is required.
-                </div>
-              </div>
-
-                <div class="form-group mb-1">
-                <label for="status" class="form-label">System Status</label>
-                <input type="number" class="form-control" name="status"  id="status" [(ngModel)]="systemStatus" placeholder="System Status"  required>
-                <div class="invalid-feedback">
-                  Valid systemStatus is required.
-                </div>
-              </div>
-            <div>
+            <div class="form-group mb-1">
+            <label for="surname" class="form-label">Surname</label>
             <input
-            type="submit"
-            value="Save Record"
-            class="btn btn-primary m-1"
-          />
+              type="text"
+              class="form-control"
+              name="surname"
+              id="surname"
+              [(ngModel)]="surname"
+              placeholder="Surname"
+              required
+            />
+            <div class="invalid-feedback">Valid surname is required.</div>
+          </div>
+
+          <div class="form-group mb-1">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input
+              type="date"
+              class="form-control"
+              name="startDate"
+              [(ngModel)]="startDate"
+              (ngModelChange)="this.startDate = $event"
+            />
+            <div class="invalid-feedback">Valid startDate is required.</div>
+          </div>
+
+          <div class="form-group mb-1">
+            <label for="status" class="form-label">System Status</label>
+            <input
+              type="number"
+              class="form-control"
+              name="status"
+              id="status"
+              [(ngModel)]="systemStatus"
+              placeholder="System Status"
+              required
+            />
+            <div class="invalid-feedback">Valid systemStatus is required.</div>
+          </div>
+
+          <div class="form-group mb-1">
+          <label for="email" class="form-label">Email</label>
           <input
-            type="reset"
-            value="Reset Record"
-            class="btn btn-warning m-1"
+            type="text"
+            class="form-control"
+            name="email"
+            id="email"
+            [(ngModel)]="email"
+            placeholder="Email"
+            required
           />
+          <div class="invalid-feedback">Valid email is required.</div>
         </div>
+
+        <div class="form-group mb-1">
+        <label for="phoneNumber" class="form-label">Phone Number</label>
+        <input
+          type="text"
+          class="form-control"
+          name="phoneNumber"
+          id="phoneNumber"
+          [(ngModel)]="phoneNumber"
+          placeholder="phoneNumber"
+          required
+        />
+        <div class="invalid-feedback">Valid phone number is required.</div>
+      </div>
+      </div>
+          <div>
+            <input
+              type="submit"
+              value="Save Record"
+              class="btn btn-primary m-1"
+            />
+            <input
+              type="reset"
+              value="Reset Record"
+              class="btn btn-warning m-1"
+            />
+          </div>
         </div>
-            </form>
-        </div>
-    </main>
-  </div>
+      </form>
+    </div>
+  </main>
+</div>

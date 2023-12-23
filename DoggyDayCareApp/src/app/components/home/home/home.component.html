@@ -1,0 +1,14 @@
+<main>
+  <H2>Welcome {{ inloggedInUser.forename }}</H2>
+  <div class="row">
+    <div class="col"></div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+          <app-home-sessions
+            [inloggedInUser]="inloggedInUser"
+          ></app-home-sessions>
+        </div>
+      </div>
+</main>

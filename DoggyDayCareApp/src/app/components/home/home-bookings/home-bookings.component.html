@@ -1,0 +1,31 @@
+  <div class="card-body">
+    <div class="container">
+      <div class="row p-1 my-2">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Forename</th>
+              <th scope="col">Surname</th>
+              <th scope="col">Breed</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr *ngFor="let dog of bookedDogs">
+              <td>
+                <a
+                  [title]="'SelectDog'"
+                  [routerLink]="['/dog-profile', dog.id]"
+                >
+                  {{ dog.id }}
+                </a>
+              </td>
+              <td>{{ dog.forename }}</td>
+              <td>{{ dog.surname }}</td>
+              <td>{{ dog.breed.name }}</td>
+              <td>{{ dog.description }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
